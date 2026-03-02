@@ -7,9 +7,9 @@ type Tab = "home" | "experience" | "projects" | "contact";
 function normalizeTab(hash: string): Tab {
   const raw = hash.replace(/^#/, "").trim().toLowerCase();
   switch (raw) {
-    case "investment-pitches":
+    case "experience":
     case "projects":
-    case "resume":
+    case "contact":
       return raw;
     case "home":
     case "":
@@ -46,8 +46,7 @@ export default function App() {
         <section className="content" aria-label="Experience">
           <h2 className="sectionTitle">Experience</h2>
           <p className="sectionBody">
-            A place for memos, theses, and write-ups. Add links to PDFs, blog
-            posts, or decks here.
+            Where I've worked and what I've done.
           </p>
         </section>
       );
@@ -58,7 +57,7 @@ export default function App() {
         <section className="content" aria-label="Projects">
           <h2 className="sectionTitle">Projects</h2>
           <p className="sectionBody">
-            A few things I&apos;ve built.
+            A few things I've worked on.
           </p>
         </section>
       );
@@ -80,7 +79,7 @@ export default function App() {
         <h1 className="title">Hi, I&apos;m Harun</h1>
 
         <p className="subtitle">
-          Based inNorthern Virginia. Current freshman at George Mason University
+          Based in Northern Virginia. Current freshman at George Mason University
         </p>
 
         <div className="social" aria-label="Social links">
