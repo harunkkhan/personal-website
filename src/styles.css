@@ -1,0 +1,114 @@
+:root {
+  --text: #111;
+  --muted: rgba(17, 17, 17, 0.75);
+  --link: #111;
+  --bg: #fff;
+  --focus: rgba(17, 17, 17, 0.22);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+}
+
+::selection {
+  background: rgba(17, 17, 17, 0.12);
+}
+
+.page {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 64px 24px;
+}
+
+.card {
+  width: min(560px, 100%);
+  text-align: center;
+}
+
+.title {
+  font-size: clamp(38px, 4.5vw, 56px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 14px;
+}
+
+.subtitle {
+  margin: 0 0 26px;
+  line-height: 1.35;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.links {
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  margin: 0 0 26px;
+}
+
+.link {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: from-font;
+  text-underline-offset: 2px;
+  font-size: 14px;
+}
+
+.link:hover {
+  opacity: 0.75;
+}
+
+.social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 0 0 22px;
+}
+
+.iconLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 6px;
+}
+
+.iconLink:hover {
+  background: rgba(17, 17, 17, 0.06);
+}
+
+.iconLink:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.icon {
+  display: block;
+}
+
+.email {
+  display: inline-block;
+  color: var(--link);
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.email:hover {
+  opacity: 0.75;
+}
+
