@@ -79,7 +79,7 @@ export default function App() {
         <h1 className="title">Hi, I&apos;m Harun</h1>
 
         <p className="subtitle">
-          Based in Northern Virginia. Current freshman at George Mason University
+          Based in Northern Virginia. Current freshman at George Mason University.
         </p>
 
         <div className="social" aria-label="Social links">
