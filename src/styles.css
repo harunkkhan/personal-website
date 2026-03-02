@@ -129,7 +129,7 @@ body {
 .social {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 14px;
   margin: 0 0 22px;
 }
@@ -155,18 +155,6 @@ body {
 
 .icon {
   display: block;
-}
-
-.email {
-  display: inline-block;
-  color: var(--link);
-  font-size: 13px;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.email:hover {
-  opacity: 0.75;
 }
 
 .sectionTitle {

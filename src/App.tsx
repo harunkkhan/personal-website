@@ -81,36 +81,21 @@ export default function App() {
         <h1 className="title">Hi, I&apos;m Harun</h1>
 
         <p className="subtitle">
-          Building things on the web. Based in SF.
-          <br />
-          Always learning.
+          Northern Virginia based. Current freshman at George Mason University
         </p>
-
-        <nav className="links" aria-label="Primary links">
-          <a className="link" href="#projects">
-            Book Tracker
-          </a>
-          <a className="link" href="#investment-pitches">
-            View my writing
-          </a>
-        </nav>
 
         <div className="social" aria-label="Social links">
           <SocialIconLink
-            href="https://github.com/"
+            href="https://github.com/harunkkhan"
             label="GitHub"
             icon={<GitHubIcon />}
           />
           <SocialIconLink
-            href="https://www.linkedin.com/"
+            href="https://www.linkedin.com/in/harun-k-khan/"
             label="LinkedIn"
             icon={<LinkedInIcon />}
           />
         </div>
-
-        <a className="email" href="mailto:harun@example.com">
-          harun[at]example[dot]com
-        </a>
       </section>
     );
   })();
