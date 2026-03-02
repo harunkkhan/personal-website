@@ -141,7 +141,11 @@ export default function App() {
   return (
     <main className="page">
       <header className="topNav" aria-label="Primary navigation">
-        <nav className="topNavInner">
+        <div className="topNavInner">
+          <a href="#" className="siteLogo" aria-label="Home">
+            <img src="/hk-logo.png" alt="Harun Khan" width={44} height={44} />
+          </a>
+          <nav className="topNavTabs">
           {tabs.map((t) => {
             const isActive = t.id === activeTab;
             return (
@@ -155,7 +159,8 @@ export default function App() {
               </a>
             );
           })}
-        </nav>
+          </nav>
+        </div>
       </header>
 
       <div className="contentWrap">{content}</div>

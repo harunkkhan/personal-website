@@ -46,7 +46,27 @@ body {
   margin: 0 auto;
   display: flex;
   align-items: center;
+  gap: clamp(18px, 4vw, 56px);
+}
+
+.siteLogo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.siteLogo img {
+  display: block;
+  height: 40px;
+  width: auto;
+  margin-top: 4px;
+}
+
+.topNavTabs {
+  display: flex;
+  align-items: center;
   justify-content: center;
+  flex: 1;
   gap: clamp(18px, 4vw, 56px);
 }
 
