@@ -44,10 +44,14 @@ export default function App() {
     if (activeTab === "experience") {
       return (
         <section className="content" aria-label="Experience">
-          <h2 className="sectionTitle">Experience</h2>
-          <p className="sectionBody">
-            Where I've worked and what I've done.
+          <h2 className="pageTitle">Experience</h2>
+          <p className="pageIntro">
+            Where I&apos;ve worked and what I&apos;ve done.
           </p>
+          <div className="pageDivider" />
+          <div className="pageBody">
+            <p className="sectionBody">Add your roles, dates, and highlights here.</p>
+          </div>
         </section>
       );
     }
@@ -55,10 +59,14 @@ export default function App() {
     if (activeTab === "projects") {
       return (
         <section className="content" aria-label="Projects">
-          <h2 className="sectionTitle">Projects</h2>
-          <p className="sectionBody">
-            A few things I've worked on.
+          <h2 className="pageTitle">Projects</h2>
+          <p className="pageIntro">
+            A few things I&apos;ve worked on.
           </p>
+          <div className="pageDivider" />
+          <div className="pageBody">
+            <p className="sectionBody">Add your projects and links here.</p>
+          </div>
         </section>
       );
     }
@@ -66,12 +74,11 @@ export default function App() {
     if (activeTab === "contact") {
       return (
         <section className="content" aria-label="Contact">
-          <h2 className="contactTitle">Get in Touch</h2>
-          <p className="contactIntro">
+          <h2 className="pageTitle">Get in Touch</h2>
+          <p className="pageIntro">
             Feel free to reach out — I love chatting.
           </p>
-
-          <div className="contactDivider" />
+          <div className="pageDivider" />
 
           <div className="contactBlock">
             <h3 className="contactHeading">Emails</h3>
@@ -108,12 +115,12 @@ export default function App() {
 
     return (
       <section className="content" aria-label="Home">
-        <h1 className="title">Hi, I&apos;m Harun</h1>
-
-        <p className="subtitle">
+        <h1 className="pageTitle">Harun Khan</h1>
+        <p className="pageIntro">
           Based in Northern Virginia. Current freshman at George Mason University.
         </p>
-
+        <div className="pageDivider" />
+        <div className="pageBody">
         <div className="social" aria-label="Social links">
           <SocialIconLink
             href="https://www.linkedin.com/in/harun-k-khan/"
@@ -125,6 +132,7 @@ export default function App() {
             label="GitHub"
             icon={<GitHubIcon />}
           />
+        </div>
         </div>
       </section>
     );
