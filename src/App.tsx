@@ -50,7 +50,7 @@ export default function App() {
           </p>
           <div className="pageDivider" />
           <div className="pageBody">
-            <p className="sectionBody">Add your roles, dates, and highlights here.</p>
+            <p className="sectionBody"></p>
           </div>
         </section>
       );
@@ -65,7 +65,7 @@ export default function App() {
           </p>
           <div className="pageDivider" />
           <div className="pageBody">
-            <p className="sectionBody">Add your projects and links here.</p>
+            <p className="sectionBody">Coming soon...</p>
           </div>
         </section>
       );
