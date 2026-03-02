@@ -68,27 +68,23 @@ export default function App() {
         <section className="content" aria-label="Contact">
           <h2 className="contactTitle">Get in Touch</h2>
           <p className="contactIntro">
-            Feel free to reach out — I love talking to interesting people.
+            Feel free to reach out — I love chatting.
           </p>
 
           <div className="contactDivider" />
 
           <div className="contactBlock">
             <h3 className="contactHeading">Emails</h3>
-            <ul className="contactList">
-              <li>
-                <a href="mailto:harunkkhan1@gmail.com" className="contactEmailItem">
-                  <EmailIcon />
-                  <span>harunkkhan1@gmail.com</span>
-                </a>
-              </li>
-              <li>
-                <a href="mailto:hkhan71@gmu.edu" className="contactEmailItem">
-                  <EmailIcon />
-                  <span>hkhan71@gmu.edu</span>
-                </a>
-              </li>
-            </ul>
+            <div className="contactEmails" aria-label="Email links">
+              <a href="mailto:harunkkhan1@gmail.com" className="iconLink">
+                <EmailIcon />
+                <span className="iconLabel">harunkkhan1@gmail.com</span>
+              </a>
+              <a href="mailto:hkhan71@gmu.edu" className="iconLink">
+                <EmailIcon />
+                <span className="iconLabel">hkhan71@gmu.edu</span>
+              </a>
+            </div>
           </div>
 
           <div className="contactBlock">
@@ -96,12 +92,12 @@ export default function App() {
             <div className="contactSocials" aria-label="Social links">
               <SocialIconLink
                 href="https://www.instagram.com/harun.k.khan"
-                label="Instagram"
+                label="harun.k.khan"
                 icon={<InstagramIcon />}
               />
               <SocialIconLink
                 href="https://x.com/harun.k.khan"
-                label="X"
+                label="harunkanwalkhan"
                 icon={<XIcon />}
               />
             </div>
