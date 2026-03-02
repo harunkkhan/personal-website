@@ -1,5 +1,5 @@
 import SocialIconLink from "./components/SocialIconLink";
-import { GitHubIcon, LinkedInIcon } from "./components/icons";
+import { EmailIcon, GitHubIcon, InstagramIcon, LinkedInIcon, XIcon } from "./components/icons";
 import { useEffect, useMemo, useState } from "react";
 
 type Tab = "home" | "experience" | "projects" | "contact";
@@ -66,10 +66,46 @@ export default function App() {
     if (activeTab === "contact") {
       return (
         <section className="content" aria-label="Contact">
-          <h2 className="sectionTitle">Contact</h2>
-          <p className="sectionBody">
-            Where you can contact me.
+          <h2 className="contactTitle">Get in Touch</h2>
+          <p className="contactIntro">
+            Feel free to reach out — I love talking to interesting people.
           </p>
+
+          <div className="contactDivider" />
+
+          <div className="contactBlock">
+            <h3 className="contactHeading">Emails</h3>
+            <ul className="contactList">
+              <li>
+                <a href="mailto:harunkkhan1@gmail.com" className="contactEmailItem">
+                  <EmailIcon />
+                  <span>harunkkhan1@gmail.com</span>
+                </a>
+              </li>
+              <li>
+                <a href="mailto:hkhan71@gmu.edu" className="contactEmailItem">
+                  <EmailIcon />
+                  <span>hkhan71@gmu.edu</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div className="contactBlock">
+            <h3 className="contactHeading">Socials</h3>
+            <div className="contactSocials" aria-label="Social links">
+              <SocialIconLink
+                href="https://www.instagram.com/harun.k.khan"
+                label="Instagram"
+                icon={<InstagramIcon />}
+              />
+              <SocialIconLink
+                href="https://x.com/harun.k.khan"
+                label="X"
+                icon={<XIcon />}
+              />
+            </div>
+          </div>
         </section>
       );
     }

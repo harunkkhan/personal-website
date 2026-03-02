@@ -40,3 +40,73 @@ export function LinkedInIcon({ title = "LinkedIn" }: IconProps) {
   );
 }
 
+export function InstagramIcon({ title = "Instagram" }: IconProps) {
+  return (
+    <svg
+      className="icon"
+      viewBox="0 0 24 24"
+      width="18"
+      height="18"
+      role="img"
+      aria-label={title}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect
+        x="3"
+        y="3"
+        width="18"
+        height="18"
+        rx="5"
+        ry="5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+      <circle
+        cx="12"
+        cy="12"
+        r="4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+      <circle cx="17" cy="7" r="1.1" fill="currentColor" />
+    </svg>
+  );
+}
+
+export function XIcon({ title = "X" }: IconProps) {
+  return (
+    <img
+      src="/x-logo.png"
+      alt={title}
+      className="icon"
+      width={18}
+      height={18}
+      loading="lazy"
+    />
+  );
+}
+
+export function EmailIcon({ title = "Email" }: IconProps) {
+  return (
+    <svg
+      className="icon"
+      viewBox="0 0 24 24"
+      width="18"
+      height="18"
+      role="img"
+      aria-label={title}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+        d="M3 7h18v12H3V7zM3 7l9 6 9-6"
+      />
+    </svg>
+  );
+}
+

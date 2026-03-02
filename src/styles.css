@@ -94,6 +94,68 @@ body {
   text-align: left;
 }
 
+.contactTitle {
+  margin: 0 0 10px;
+  font-size: clamp(34px, 4vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.contactIntro {
+  margin: 0 0 28px;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.contactDivider {
+  height: 1px;
+  width: 100%;
+  background: rgba(17, 17, 17, 0.1);
+  margin: 24px 0 28px;
+}
+
+.contactBlock {
+  margin-top: 28px;
+}
+
+.contactSocials {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contactHeading {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.contactList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.contactList li {
+  white-space: nowrap;
+}
+
+.contactEmailItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.contactEmailItem:hover {
+  opacity: 0.8;
+}
+
 .title {
   font-size: clamp(38px, 4.5vw, 56px);
   font-weight: 600;
