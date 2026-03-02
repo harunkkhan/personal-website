@@ -84,14 +84,14 @@ export default function App() {
 
         <div className="social" aria-label="Social links">
           <SocialIconLink
-            href="https://github.com/harunkkhan"
-            label="GitHub"
-            icon={<GitHubIcon />}
-          />
-          <SocialIconLink
             href="https://www.linkedin.com/in/harun-k-khan/"
             label="LinkedIn"
             icon={<LinkedInIcon />}
+          />
+          <SocialIconLink
+            href="https://github.com/harunkkhan"
+            label="GitHub"
+            icon={<GitHubIcon />}
           />
         </div>
       </section>
