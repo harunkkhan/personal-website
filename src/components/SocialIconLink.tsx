@@ -16,6 +16,7 @@ export default function SocialIconLink({ href, label, icon }: Props) {
       rel="noreferrer"
     >
       {icon}
+      <span className="iconLabel">{label}</span>
     </a>
   );
 }

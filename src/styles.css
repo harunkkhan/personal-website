@@ -129,7 +129,7 @@ body {
 .social {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 14px;
   margin: 0 0 22px;
 }
@@ -137,11 +137,12 @@ body {
 .iconLink {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   color: var(--text);
   text-decoration: none;
   border-radius: 10px;
   padding: 6px;
+  gap: 8px;
 }
 
 .iconLink:hover {
@@ -155,6 +156,11 @@ body {
 
 .icon {
   display: block;
+}
+
+.iconLabel {
+  font-size: 14px;
+  color: rgba(17, 17, 17, 0.75);
 }
 
 .sectionTitle {

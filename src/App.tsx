@@ -2,7 +2,7 @@ import SocialIconLink from "./components/SocialIconLink";
 import { GitHubIcon, LinkedInIcon } from "./components/icons";
 import { useEffect, useMemo, useState } from "react";
 
-type Tab = "home" | "investment-pitches" | "projects" | "resume";
+type Tab = "home" | "experience" | "projects" | "contact";
 
 function normalizeTab(hash: string): Tab {
   const raw = hash.replace(/^#/, "").trim().toLowerCase();
@@ -23,9 +23,9 @@ export default function App() {
     () =>
       [
         { id: "home" as const, label: "Home" },
-        { id: "investment-pitches" as const, label: "Investment Pitches" },
+        { id: "experience" as const, label: "Experience" },
         { id: "projects" as const, label: "Projects" },
-        { id: "resume" as const, label: "Resume" },
+        { id: "contact" as const, label: "Contact" },
       ] satisfies ReadonlyArray<{ id: Tab; label: string }>,
     [],
   );
@@ -41,10 +41,10 @@ export default function App() {
   }, []);
 
   const content = (() => {
-    if (activeTab === "investment-pitches") {
+    if (activeTab === "experience") {
       return (
-        <section className="content" aria-label="Investment Pitches">
-          <h2 className="sectionTitle">Investment Pitches</h2>
+        <section className="content" aria-label="Experience">
+          <h2 className="sectionTitle">Experience</h2>
           <p className="sectionBody">
             A place for memos, theses, and write-ups. Add links to PDFs, blog
             posts, or decks here.
@@ -58,19 +58,18 @@ export default function App() {
         <section className="content" aria-label="Projects">
           <h2 className="sectionTitle">Projects</h2>
           <p className="sectionBody">
-            Highlight a few things you&apos;ve built. Keep it short: what it is,
-            why it matters, and a link.
+            A few things I&apos;ve built.
           </p>
         </section>
       );
     }
 
-    if (activeTab === "resume") {
+    if (activeTab === "contact") {
       return (
-        <section className="content" aria-label="Resume">
-          <h2 className="sectionTitle">Resume</h2>
+        <section className="content" aria-label="Contact">
+          <h2 className="sectionTitle">Contact</h2>
           <p className="sectionBody">
-            Link out to a PDF resume or add a minimal timeline here.
+            Where you can contact me.
           </p>
         </section>
       );
@@ -81,7 +80,7 @@ export default function App() {
         <h1 className="title">Hi, I&apos;m Harun</h1>
 
         <p className="subtitle">
-          Northern Virginia based. Current freshman at George Mason University
+          Based inNorthern Virginia. Current freshman at George Mason University
         </p>
 
         <div className="social" aria-label="Social links">
