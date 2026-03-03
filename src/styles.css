@@ -327,6 +327,22 @@ body {
   color: var(--muted);
 }
 
+.experienceCardLinks {
+  margin: 6px 0 0;
+  font-size: 12px;
+}
+
+.experienceCardLink {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: from-font;
+  text-underline-offset: 2px;
+}
+
+.experienceCardLink:hover {
+  opacity: 0.8;
+}
+
 .experienceCardBody {
   margin: 10px 0 0;
   padding-left: 0;
@@ -334,6 +350,23 @@ body {
   font-size: 11px;
   line-height: 1.5;
   text-align: left;
+}
+
+.experienceCardBullets {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  list-style-type: disc;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.experienceCardBullets .experienceCardBody {
+  margin: 0 0 4px;
+}
+
+.experienceCardBullets .experienceCardBody:last-child {
+  margin-bottom: 0;
 }
 
 .contactBlock {

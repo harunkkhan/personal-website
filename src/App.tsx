@@ -40,6 +40,7 @@ export default function App() {
   const skipNextHashChange = useRef(false);
 
   const [expandedExperience, setExpandedExperience] = useState<Set<number>>(new Set());
+  const [expandedEducationCards, setExpandedEducationCards] = useState<Set<string>>(new Set());
   const [projectsSubTab, setProjectsSubTab] = useState<ProjectsSubTab>("investment");
   const [educationSubTab, setEducationSubTab] = useState<EducationSubTab>("education");
 
@@ -57,7 +58,7 @@ export default function App() {
     () =>
       [
         { id: "education" as const, label: "Education" },
-        { id: "extracurriculars" as const, label: "Extracurriculars" },
+        { id: "extracurriculars" as const, label: "School Involvement" },
         { id: "programs" as const, label: "Programs" },
         { id: "awards" as const, label: "Achievements" },
       ] satisfies ReadonlyArray<{ id: EducationSubTab; label: string }>,
@@ -72,6 +73,179 @@ export default function App() {
       return next;
     });
   };
+
+  const toggleEducationCard = (key: string) => {
+    setExpandedEducationCards((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+  };
+
+  type BulletWithLinks = {
+    text: string;
+    profileHref?: string;
+    picturesHref?: string;
+  };
+
+  type EducationCardItem = {
+    logo?: string;
+    institution: string;
+    title: string;
+    dates: string;
+    body?: string;
+    bullets?: (string | BulletWithLinks)[];
+    /** Link for "Profile" (e.g. award profile page). Shown below card title. */
+    href?: string;
+    /** Link for "Pictures" (e.g. gallery or photos page). Shown below card title. */
+    picturesHref?: string;
+  };
+
+  const renderEducationCards = (
+    cards: EducationCardItem[],
+    prefix: string,
+    expandable = true,
+    showInstitution = true,
+    showLogoPlaceholder = true,
+  ) => (
+    <div className="experienceList">
+      {cards.map((item, i) => {
+        const key = `${prefix}-${i}`;
+        const isExpanded = expandedEducationCards.has(key);
+        const initialsSource = item.institution || item.title;
+        const showLogo = showLogoPlaceholder || item.logo;
+        return (
+          <article key={key} className="experienceCard">
+            <div className="experienceCardHeader">
+              {showLogo &&
+                (item.logo ? (
+                  <img
+                    src={`${import.meta.env.BASE_URL}${item.logo}`}
+                    alt=""
+                    className="experienceCardLogo"
+                    width={48}
+                    height={48}
+                  />
+                ) : (
+                  <div className="experienceCardLogo experienceCardLogoPlaceholder">
+                    {initialsSource
+                      .split(" ")
+                      .map((w) => w[0])
+                      .join("")
+                      .slice(0, 2)}
+                  </div>
+                ))}
+              <div className="experienceCardTitleBlock">
+                <h3 className="experienceCardTitle">{item.title}</h3>
+                <p className="experienceCardMeta">
+                  {showInstitution && item.institution
+                    ? `${item.institution} | ${item.dates}`
+                    : item.dates}
+                </p>
+                {(item.href || item.picturesHref) && (
+                  <p className="experienceCardLinks">
+                    {item.href && (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="experienceCardLink"
+                      >
+                        Profile
+                      </a>
+                    )}
+                    {item.href && item.picturesHref && " · "}
+                    {item.picturesHref && (
+                      <a
+                        href={item.picturesHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="experienceCardLink"
+                      >
+                        Pictures
+                      </a>
+                    )}
+                  </p>
+                )}
+              </div>
+              {expandable && (
+                <button
+                  type="button"
+                  className="experienceCardToggle"
+                  onClick={() => toggleEducationCard(key)}
+                  aria-expanded={isExpanded}
+                  aria-label={isExpanded ? "Collapse description" : "Expand description"}
+                >
+                  <svg
+                    className={`experienceCardChevron ${isExpanded ? "experienceCardChevronExpanded" : ""}`}
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    aria-hidden
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"
+                    />
+                  </svg>
+                </button>
+              )}
+            </div>
+            {expandable && isExpanded && (item.body || (item.bullets && item.bullets.length > 0)) && (
+              <>
+                <div className="experienceCardDivider" />
+                {item.bullets && item.bullets.length > 0 ? (
+                  <ul className="experienceCardBullets">
+                    {item.bullets.map((bullet, j) => {
+                      const isWithLinks = typeof bullet !== "string";
+                      const text = isWithLinks ? bullet.text : bullet;
+                      const profileHref = isWithLinks ? bullet.profileHref : undefined;
+                      const picturesHref = isWithLinks ? bullet.picturesHref : undefined;
+                      const hasLinks = profileHref || picturesHref;
+                      return (
+                        <li key={j} className="experienceCardBody">
+                          {text}
+                          {hasLinks && (
+                            <>
+                              {" | "}
+                              {profileHref && (
+                                <a
+                                  href={profileHref}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="experienceCardLink"
+                                >
+                                  Profile
+                                </a>
+                              )}
+                              {profileHref && picturesHref && " | "}
+                              {picturesHref && (
+                                <a
+                                  href={picturesHref}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="experienceCardLink"
+                                >
+                                  Pictures
+                                </a>
+                              )}
+                            </>
+                          )}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                ) : (
+                  item.body && <p className="experienceCardBody">{item.body}</p>
+                )}
+              </>
+            )}
+          </article>
+        );
+      })}
+    </div>
+  );
 
   useEffect(() => {
     const onHashChange = () => {
@@ -194,7 +368,7 @@ export default function App() {
         <section className="content" aria-label="Education">
           <h2 className="pageTitle">Education</h2>
           <p className="pageIntro">
-            Schools, programs, and fellowships.
+            My educational history.
           </p>
           <nav className="projectsSubTabs" aria-label="Education categories">
             {educationSubTabs.map((t) => {
@@ -214,18 +388,92 @@ export default function App() {
           </nav>
           <div className="pageDivider" />
           <div className="pageBody">
-            {educationSubTab === "education" && (
-              <p className="sectionBody">Education coming soon...</p>
-            )}
-            {educationSubTab === "extracurriculars" && (
-              <p className="sectionBody">Extracurriculars coming soon...</p>
-            )}
-            {educationSubTab === "programs" && (
-              <p className="sectionBody">Programs & Fellowships coming soon...</p>
-            )}
-            {educationSubTab === "awards" && (
-              <p className="sectionBody">Awards & Achievements coming soon...</p>
-            )}
+            {educationSubTab === "education" &&
+              renderEducationCards(
+                [
+                  {
+                    institution: "",
+                    title: "George Mason University",
+                    dates: "Aug 2025 - Present",
+                    body: "Building up myself.",
+                  },
+                  {
+                    institution: "",
+                    title: "Woodson High School",
+                    dates: "Aug 2021 - Jun 2025",
+                    body: "Met the smartest people I know + had a blast.",
+                  },
+                ],
+                "education",
+                true,
+                false,
+              )}
+            {educationSubTab === "extracurriculars" &&
+              renderEducationCards(
+                [
+                  {
+                    institution: "PatriotHacks",
+                    title: "President",
+                    dates: "2025 - Present",
+                    body: "Hosting GMU's largest hackathon with 800+ attendees; became President in less than a year.",
+                  },
+                  {
+                    institution: "Montano Student Managed Investment Fund (SMIF)",
+                    title: "Head of Training & Associate",
+                    dates: "2025 - Present",
+                    body: "First experience in finance; became Head of Training in less than a year.",
+                  },
+                ],
+                "extracurriculars",
+              )}
+            {educationSubTab === "programs" &&
+              renderEducationCards(
+                [
+                  {
+                    institution: "",
+                    title: "Immersion Programs & Discovery Days",
+                    dates: "HS & College | Ongoing",
+                    bullets: [
+                      "Expedition EY | Ernst & Young | 2026",
+                      "First Year Immersion Program | Oliver Wyman | 2026",
+                      "SIG Discovery Day | Susquehanna International Group | 2025",
+                      "Exploring Complex Solutions in a Complex World | The Mercatus Center | 2025",
+                    ],
+                  },
+                ],
+                "programs",
+                true,
+                false,
+                false,
+              )}
+            {educationSubTab === "awards" &&
+              renderEducationCards(
+                [
+                  {
+                    institution: "",
+                    title: "Awards, Honors & Achievements",
+                    dates: "HS & College | Ongoing",
+                    bullets: [
+                      "SEC Scholar | Only freshman selected; 1 of 100 selected among undergrad, grad & law students",
+                      {
+                        text: "FCPS Student Peace Award Winner | 1 of 26 selected across FCPS",
+                        profileHref: "https://fairfax.studentpeaceawards.org/harun-khan/",
+                        picturesHref: "https://drive.google.com/drive/folders/1zK15lw8jhIdUYv1lz5QNIB6xE0ki8Fuo?usp=sharing",
+                      },
+                      "IEEE MIT Undergraduate Research & Technology Conference | Paper Publication & Presenter",
+                      "ASPRS & AGU | Largest Geospatial Research Conferences in the World | Accepted Presenter",
+                      {
+                        text: "Congressional App Challenge 3rd Place Winner | District 11",
+                        picturesHref: "https://drive.google.com/drive/folders/1nQRSIwWXiqy5uY0ma26VMgIwPAI83qO1?usp=sharing",
+                      }
+                    ],
+                  },
+                ],
+                "awards",
+                true,
+                false,
+                false,
+              )}
           </div>
         </section>
       );
