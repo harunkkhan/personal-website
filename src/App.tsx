@@ -61,22 +61,16 @@ export default function App() {
         body: string;
       }> = [
         {
-          institution: "__",
-          title: "__",
-          dates: "__",
-          body: "__",
+          institution: "United States Securities & Exchange Commission",
+          title: "Spring Analyst",
+          dates: "Feb 2026 - Present",
+          body: "Division of Economic & Risk Analysis - Office of Asset Management",
         },
         {
-          institution: "__",
-          title: "__",
-          dates: "__",
-          body: "__",
-        },
-        {
-          institution: "__",
-          title: "__",
-          dates: "__",
-          body: "__",
+          institution: "Leidos",
+          title: "Software Engineering Intern",
+          dates: "Jun 2025 - Aug 2025",
+          body: "Gunnery Training Simulations (GTS) for the US Military",
         },
         
       ];
