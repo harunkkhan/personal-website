@@ -42,17 +42,21 @@ export default function App() {
 
   const content = (() => {
     if (activeTab === "experience") {
-      const experience = [
+      const experiences: Array<{
+        logo?: string;
+        institution: string;
+        title: string;
+        dates: string;
+        bullets: string[];
+      }> = [
         {
-          title: "___",
-          org: "___",
-          dates: "___",
-          description: [
+          institution: "__",
+          title: "__",
+          dates: "__",
+          bullets: [
             "___",
           ],
-          logoUrl: null as string | null,
         },
-        // Add more entries here
       ];
       return (
         <section className="content" aria-label="Experience">
@@ -63,12 +67,12 @@ export default function App() {
           <div className="pageDivider" />
           <div className="pageBody">
             <div className="experienceList">
-              {experience.map((job, i) => (
+              {experiences.map((exp, i) => (
                 <article key={i} className="experienceCard">
-                  <div className="experienceCardTop">
-                    {job.logoUrl ? (
+                  <div className="experienceCardHeader">
+                    {exp.logo ? (
                       <img
-                        src={job.logoUrl}
+                        src={exp.logo}
                         alt=""
                         className="experienceCardLogo"
                         width={48}
@@ -76,23 +80,27 @@ export default function App() {
                       />
                     ) : (
                       <div className="experienceCardLogo experienceCardLogoPlaceholder">
-                        {job.org.slice(0, 2)}
+                        {exp.institution
+                          .split(" ")
+                          .map((w) => w[0])
+                          .join("")
+                          .slice(0, 2)}
                       </div>
                     )}
-                    <div className="experienceCardHeader">
-                      <h3 className="experienceCardTitle">{job.title}</h3>
+                    <div className="experienceCardTitleBlock">
+                      <h3 className="experienceCardTitle">{exp.title}</h3>
                       <p className="experienceCardMeta">
-                        {job.org} | {job.dates}
+                        {exp.institution} | {exp.dates}
                       </p>
                     </div>
                   </div>
-                  <div className="experienceCardDescription">
-                    <ul className="experienceCardList">
-                      {job.description.map((line, j) => (
-                        <li key={j}>{line}</li>
+                  {exp.bullets.length > 0 && (
+                    <ul className="experienceCardBullets">
+                      {exp.bullets.map((b, j) => (
+                        <li key={j}>{b}</li>
                       ))}
                     </ul>
-                  </div>
+                  )}
                 </article>
               ))}
             </div>
@@ -174,7 +182,7 @@ export default function App() {
           </div>
           <div className="homePhoto">
             <img
-              src="/harun-profile.png"
+              src={`${import.meta.env.BASE_URL}harun-profile.png`}
               alt="Harun Khan"
               width={240}
               height={240}
@@ -205,7 +213,7 @@ export default function App() {
       <header className="topNav" aria-label="Primary navigation">
         <div className="topNavInner">
           <a href="#" className="siteLogo" aria-label="Home">
-            <img src="/hk-logo.png" alt="Harun Khan" width={44} height={44} />
+            <img src={`${import.meta.env.BASE_URL}hk-logo.png`} alt="Harun Khan" width={44} height={44} />
           </a>
           <nav className="topNavTabs">
           {tabs.map((t) => {

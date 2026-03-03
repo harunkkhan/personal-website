@@ -78,7 +78,7 @@ export function InstagramIcon({ title = "Instagram" }: IconProps) {
 export function XIcon({ title = "X" }: IconProps) {
   return (
     <img
-      src="/x-logo.png"
+      src={`${import.meta.env.BASE_URL}x-logo.png`}
       alt={title}
       className="icon"
       width={18}
