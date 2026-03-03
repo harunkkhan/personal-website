@@ -114,6 +114,34 @@ body {
   text-align: left;
 }
 
+.contentHome {
+  width: min(760px, 100%);
+}
+
+.homeIntro {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 24px 32px;
+}
+
+.homeText {
+  flex: 1;
+  min-width: 0;
+}
+
+.homePhoto {
+  flex-shrink: 0;
+}
+
+.homePhoto img {
+  display: block;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
 /* Shared page header (all tabs) */
 .pageTitle {
   margin: 0 0 10px;

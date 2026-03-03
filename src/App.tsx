@@ -114,25 +114,37 @@ export default function App() {
     }
 
     return (
-      <section className="content" aria-label="Home">
-        <h1 className="pageTitle">Harun Khan</h1>
-        <p className="pageIntro">
-          Based in Northern Virginia. 19 Years Young.
-        </p>
+      <section className="content contentHome" aria-label="Home">
+        <div className="homeIntro">
+          <div className="homeText">
+            <h1 className="pageTitle">Harun Khan</h1>
+            <p className="pageIntro">
+              Based in Northern Virginia. 19 Years Young.
+            </p>
+          </div>
+          <div className="homePhoto">
+            <img
+              src="/harun-profile.png"
+              alt="Harun Khan"
+              width={240}
+              height={240}
+            />
+          </div>
+        </div>
         <div className="pageDivider" />
         <div className="pageBody">
-        <div className="social" aria-label="Social links">
-          <SocialIconLink
-            href="https://www.linkedin.com/in/harun-k-khan/"
-            label="LinkedIn"
-            icon={<LinkedInIcon />}
-          />
-          <SocialIconLink
-            href="https://github.com/harunkkhan"
-            label="GitHub"
-            icon={<GitHubIcon />}
-          />
-        </div>
+          <div className="social" aria-label="Social links">
+            <SocialIconLink
+              href="https://www.linkedin.com/in/harun-k-khan/"
+              label="LinkedIn"
+              icon={<LinkedInIcon />}
+            />
+            <SocialIconLink
+              href="https://github.com/harunkkhan"
+              label="GitHub"
+              icon={<GitHubIcon />}
+            />
+          </div>
         </div>
       </section>
     );
