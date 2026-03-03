@@ -117,7 +117,7 @@ export default function App() {
       <section className="content" aria-label="Home">
         <h1 className="pageTitle">Harun Khan</h1>
         <p className="pageIntro">
-          Based in Northern Virginia. Current freshman at George Mason University.
+          Based in Northern VA. 19 Years Young.
         </p>
         <div className="pageDivider" />
         <div className="pageBody">
