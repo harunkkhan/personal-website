@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 type Tab = "home" | "experience" | "education" | "projects" | "contact";
 type ProjectsSubTab = "investment" | "cs" | "research";
+type EducationSubTab = "education" | "extracurriculars" | "programs" | "awards";
 
 function normalizeTab(hash: string): Tab {
   const raw = hash.replace(/^#/, "").trim().toLowerCase();
@@ -40,6 +41,7 @@ export default function App() {
 
   const [expandedExperience, setExpandedExperience] = useState<Set<number>>(new Set());
   const [projectsSubTab, setProjectsSubTab] = useState<ProjectsSubTab>("investment");
+  const [educationSubTab, setEducationSubTab] = useState<EducationSubTab>("education");
 
   const projectSubTabs = useMemo(
     () =>
@@ -48,6 +50,17 @@ export default function App() {
         { id: "cs" as const, label: "Software Projects" },
         { id: "research" as const, label: "Research & Publications" },
       ] satisfies ReadonlyArray<{ id: ProjectsSubTab; label: string }>,
+    [],
+  );
+
+  const educationSubTabs = useMemo(
+    () =>
+      [
+        { id: "education" as const, label: "Education" },
+        { id: "extracurriculars" as const, label: "Extracurriculars" },
+        { id: "programs" as const, label: "Programs" },
+        { id: "awards" as const, label: "Achievements" },
+      ] satisfies ReadonlyArray<{ id: EducationSubTab; label: string }>,
     [],
   );
 
@@ -183,9 +196,36 @@ export default function App() {
           <p className="pageIntro">
             Schools, programs, and fellowships.
           </p>
+          <nav className="projectsSubTabs" aria-label="Education categories">
+            {educationSubTabs.map((t) => {
+              const isActive = t.id === educationSubTab;
+              return (
+                <button
+                  key={t.id}
+                  type="button"
+                  className={`projectsSubTab ${isActive ? "projectsSubTabActive" : ""}`}
+                  onClick={() => setEducationSubTab(t.id)}
+                  aria-current={isActive ? "true" : undefined}
+                >
+                  {t.label}
+                </button>
+              );
+            })}
+          </nav>
           <div className="pageDivider" />
           <div className="pageBody">
-            <p className="sectionBody">Coming soon...</p>
+            {educationSubTab === "education" && (
+              <p className="sectionBody">Education coming soon...</p>
+            )}
+            {educationSubTab === "extracurriculars" && (
+              <p className="sectionBody">Extracurriculars coming soon...</p>
+            )}
+            {educationSubTab === "programs" && (
+              <p className="sectionBody">Programs & Fellowships coming soon...</p>
+            )}
+            {educationSubTab === "awards" && (
+              <p className="sectionBody">Awards & Achievements coming soon...</p>
+            )}
           </div>
         </section>
       );
