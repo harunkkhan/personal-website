@@ -74,7 +74,7 @@ export default function App() {
     if (activeTab === "contact") {
       return (
         <section className="content" aria-label="Contact">
-          <h2 className="pageTitle">Get in Touch</h2>
+          <h2 className="pageTitle">Contact</h2>
           <p className="pageIntro">
             Feel free to reach out — I love chatting.
           </p>
