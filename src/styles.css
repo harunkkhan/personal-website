@@ -224,27 +224,18 @@ body {
   color: var(--muted);
 }
 
-.experienceCardBullets {
+.experienceCardBody {
   margin: 14px 0 0;
   padding-left: 62px;
-  list-style: disc;
-}
-
-@media (max-width: 420px) {
-  .experienceCardBullets {
-    padding-left: 20px;
-  }
-}
-
-.experienceCardBullets li {
-  margin-bottom: 6px;
   color: var(--muted);
   font-size: 15px;
   line-height: 1.5;
 }
 
-.experienceCardBullets li:last-child {
-  margin-bottom: 0;
+@media (max-width: 420px) {
+  .experienceCardBody {
+    padding-left: 0;
+  }
 }
 
 .contactBlock {

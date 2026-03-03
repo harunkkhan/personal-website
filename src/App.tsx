@@ -47,15 +47,13 @@ export default function App() {
         institution: string;
         title: string;
         dates: string;
-        bullets: string[];
+        body: string;
       }> = [
         {
           institution: "__",
           title: "__",
           dates: "__",
-          bullets: [
-            "___",
-          ],
+          body: "__",
         },
       ];
       return (
@@ -94,12 +92,8 @@ export default function App() {
                       </p>
                     </div>
                   </div>
-                  {exp.bullets.length > 0 && (
-                    <ul className="experienceCardBullets">
-                      {exp.bullets.map((b, j) => (
-                        <li key={j}>{b}</li>
-                      ))}
-                    </ul>
+                  {exp.body && (
+                    <p className="experienceCardBody">{exp.body}</p>
                   )}
                 </article>
               ))}
