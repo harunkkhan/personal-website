@@ -45,8 +45,8 @@ export default function App() {
     () =>
       [
         { id: "investment" as const, label: "Investment Projects" },
-        { id: "cs" as const, label: "CS Projects" },
-        { id: "research" as const, label: "Research" },
+        { id: "cs" as const, label: "Software Projects" },
+        { id: "research" as const, label: "Research & Publications" },
       ] satisfies ReadonlyArray<{ id: ProjectsSubTab; label: string }>,
     [],
   );
@@ -220,10 +220,10 @@ export default function App() {
               <p className="sectionBody">Investment projects coming soon...</p>
             )}
             {projectsSubTab === "cs" && (
-              <p className="sectionBody">CS projects coming soon...</p>
+              <p className="sectionBody">Software projects coming soon...</p>
             )}
             {projectsSubTab === "research" && (
-              <p className="sectionBody">Research coming soon...</p>
+              <p className="sectionBody">Research & Publications coming soon...</p>
             )}
           </div>
         </section>
