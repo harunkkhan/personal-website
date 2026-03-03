@@ -1,13 +1,15 @@
 import SocialIconLink from "./components/SocialIconLink";
 import { EmailIcon, GitHubIcon, InstagramIcon, LinkedInIcon, SubstackIcon, XIcon } from "./components/icons";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
-type Tab = "home" | "experience" | "projects" | "contact";
+type Tab = "home" | "experience" | "education" | "projects" | "contact";
+type ProjectsSubTab = "investment" | "cs" | "research";
 
 function normalizeTab(hash: string): Tab {
   const raw = hash.replace(/^#/, "").trim().toLowerCase();
   switch (raw) {
     case "experience":
+    case "education":
     case "projects":
     case "contact":
       return raw;
@@ -24,6 +26,7 @@ export default function App() {
       [
         { id: "home" as const, label: "Home" },
         { id: "experience" as const, label: "Experience" },
+        { id: "education" as const, label: "Education" },
         { id: "projects" as const, label: "Projects" },
         { id: "contact" as const, label: "Contact" },
       ] satisfies ReadonlyArray<{ id: Tab; label: string }>,
@@ -33,8 +36,20 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>(() =>
     normalizeTab(window.location.hash),
   );
+  const skipNextHashChange = useRef(false);
 
   const [expandedExperience, setExpandedExperience] = useState<Set<number>>(new Set());
+  const [projectsSubTab, setProjectsSubTab] = useState<ProjectsSubTab>("investment");
+
+  const projectSubTabs = useMemo(
+    () =>
+      [
+        { id: "investment" as const, label: "Investment Projects" },
+        { id: "cs" as const, label: "CS Projects" },
+        { id: "research" as const, label: "Research" },
+      ] satisfies ReadonlyArray<{ id: ProjectsSubTab; label: string }>,
+    [],
+  );
 
   const toggleExperience = (i: number) => {
     setExpandedExperience((prev) => {
@@ -46,10 +61,22 @@ export default function App() {
   };
 
   useEffect(() => {
-    const onHashChange = () => setActiveTab(normalizeTab(window.location.hash));
+    const onHashChange = () => {
+      if (skipNextHashChange.current) {
+        skipNextHashChange.current = false;
+        return;
+      }
+      setActiveTab(normalizeTab(window.location.hash));
+    };
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
+
+  const goToTab = (tabId: Tab) => {
+    skipNextHashChange.current = true;
+    setActiveTab(tabId);
+    window.location.hash = tabId === "home" ? "" : tabId;
+  };
 
   const content = (() => {
     if (activeTab === "experience") {
@@ -149,6 +176,21 @@ export default function App() {
       );
     }
 
+    if (activeTab === "education") {
+      return (
+        <section className="content" aria-label="Education">
+          <h2 className="pageTitle">Education</h2>
+          <p className="pageIntro">
+            Schools, programs, and fellowships.
+          </p>
+          <div className="pageDivider" />
+          <div className="pageBody">
+            <p className="sectionBody">Coming soon...</p>
+          </div>
+        </section>
+      );
+    }
+
     if (activeTab === "projects") {
       return (
         <section className="content" aria-label="Projects">
@@ -156,9 +198,33 @@ export default function App() {
           <p className="pageIntro">
             A few things I&apos;ve worked on.
           </p>
+          <nav className="projectsSubTabs" aria-label="Project categories">
+            {projectSubTabs.map((t) => {
+              const isActive = t.id === projectsSubTab;
+              return (
+                <button
+                  key={t.id}
+                  type="button"
+                  className={`projectsSubTab ${isActive ? "projectsSubTabActive" : ""}`}
+                  onClick={() => setProjectsSubTab(t.id)}
+                  aria-current={isActive ? "true" : undefined}
+                >
+                  {t.label}
+                </button>
+              );
+            })}
+          </nav>
           <div className="pageDivider" />
           <div className="pageBody">
-            <p className="sectionBody">Coming soon...</p>
+            {projectsSubTab === "investment" && (
+              <p className="sectionBody">Investment projects coming soon...</p>
+            )}
+            {projectsSubTab === "cs" && (
+              <p className="sectionBody">CS projects coming soon...</p>
+            )}
+            {projectsSubTab === "research" && (
+              <p className="sectionBody">Research coming soon...</p>
+            )}
           </div>
         </section>
       );
@@ -221,7 +287,7 @@ export default function App() {
           <div className="homeText">
             <h1 className="pageTitle">Harun Khan</h1>
             <p className="pageIntro">
-              Based in Northern Virginia. 19 Years Young.
+              First-Year @ George Mason University
             </p>
           </div>
           <div className="homePhoto">
@@ -267,8 +333,12 @@ export default function App() {
               <a
                 key={t.id}
                 className={`tab ${isActive ? "tabActive" : ""}`}
-                href={`#${t.id === "home" ? "" : t.id}`}
+                href={t.id === "home" ? "#" : `#${t.id}`}
                 aria-current={isActive ? "page" : undefined}
+                onClick={(e) => {
+                  e.preventDefault();
+                  goToTab(t.id);
+                }}
               >
                 {t.label}
               </a>
