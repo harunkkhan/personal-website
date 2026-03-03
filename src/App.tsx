@@ -393,12 +393,14 @@ export default function App() {
                 [
                   {
                     institution: "",
+                    logo: "gmu-logo.png",
                     title: "George Mason University",
                     dates: "Aug 2025 - Present",
                     body: "Building up myself.",
                   },
                   {
                     institution: "",
+                    logo: "woodson-logo.png",
                     title: "Woodson High School",
                     dates: "Aug 2021 - Jun 2025",
                     body: "Met the smartest people I know + had a blast.",
