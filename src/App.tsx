@@ -34,6 +34,17 @@ export default function App() {
     normalizeTab(window.location.hash),
   );
 
+  const [expandedExperience, setExpandedExperience] = useState<Set<number>>(new Set());
+
+  const toggleExperience = (i: number) => {
+    setExpandedExperience((prev) => {
+      const next = new Set(prev);
+      if (next.has(i)) next.delete(i);
+      else next.add(i);
+      return next;
+    });
+  };
+
   useEffect(() => {
     const onHashChange = () => setActiveTab(normalizeTab(window.location.hash));
     window.addEventListener("hashchange", onHashChange);
@@ -78,38 +89,64 @@ export default function App() {
           <div className="pageDivider" />
           <div className="pageBody">
             <div className="experienceList">
-              {experiences.map((exp, i) => (
-                <article key={i} className="experienceCard">
-                  <div className="experienceCardHeader">
-                    {exp.logo ? (
-                      <img
-                        src={exp.logo}
-                        alt=""
-                        className="experienceCardLogo"
-                        width={48}
-                        height={48}
-                      />
-                    ) : (
-                      <div className="experienceCardLogo experienceCardLogoPlaceholder">
-                        {exp.institution
-                          .split(" ")
-                          .map((w) => w[0])
-                          .join("")
-                          .slice(0, 2)}
+              {experiences.map((exp, i) => {
+                const isExpanded = expandedExperience.has(i);
+                return (
+                  <article key={i} className="experienceCard">
+                    <div className="experienceCardHeader">
+                      {exp.logo ? (
+                        <img
+                          src={exp.logo}
+                          alt=""
+                          className="experienceCardLogo"
+                          width={48}
+                          height={48}
+                        />
+                      ) : (
+                        <div className="experienceCardLogo experienceCardLogoPlaceholder">
+                          {exp.institution
+                            .split(" ")
+                            .map((w) => w[0])
+                            .join("")
+                            .slice(0, 2)}
+                        </div>
+                      )}
+                      <div className="experienceCardTitleBlock">
+                        <h3 className="experienceCardTitle">{exp.title}</h3>
+                        <p className="experienceCardMeta">
+                          {exp.institution} | {exp.dates}
+                        </p>
                       </div>
-                    )}
-                    <div className="experienceCardTitleBlock">
-                      <h3 className="experienceCardTitle">{exp.title}</h3>
-                      <p className="experienceCardMeta">
-                        {exp.institution} | {exp.dates}
-                      </p>
+                      <button
+                        type="button"
+                        className="experienceCardToggle"
+                        onClick={() => toggleExperience(i)}
+                        aria-expanded={isExpanded}
+                        aria-label={isExpanded ? "Collapse description" : "Expand description"}
+                      >
+                        <svg
+                          className={`experienceCardChevron ${isExpanded ? "experienceCardChevronExpanded" : ""}`}
+                          viewBox="0 0 24 24"
+                          width="20"
+                          height="20"
+                          aria-hidden
+                        >
+                          <path
+                            fill="currentColor"
+                            d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"
+                          />
+                        </svg>
+                      </button>
                     </div>
-                  </div>
-                  {exp.body && (
-                    <p className="experienceCardBody">{exp.body}</p>
-                  )}
-                </article>
-              ))}
+                    {isExpanded && exp.body && (
+                      <>
+                        <div className="experienceCardDivider" />
+                        <p className="experienceCardBody">{exp.body}</p>
+                      </>
+                    )}
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -222,7 +259,8 @@ export default function App() {
           <a href="#" className="siteLogo" aria-label="Home">
             <img src={`${import.meta.env.BASE_URL}hk-logo.png`} alt="Harun Khan" width={44} height={44} />
           </a>
-          <nav className="topNavTabs">
+          <div className="topNavTabsWrap">
+            <nav className="topNavTabs">
           {tabs.map((t) => {
             const isActive = t.id === activeTab;
             return (
@@ -236,7 +274,8 @@ export default function App() {
               </a>
             );
           })}
-          </nav>
+            </nav>
+          </div>
         </div>
       </header>
 

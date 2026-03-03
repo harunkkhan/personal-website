@@ -42,16 +42,18 @@ body {
 }
 
 .topNavInner {
+  position: relative;
   width: 100%;
   display: flex;
   align-items: center;
-  gap: clamp(18px, 4vw, 56px);
+  min-height: 48px;
 }
 
 .siteLogo {
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  z-index: 1;
 }
 
 .siteLogo img {
@@ -61,11 +63,25 @@ body {
   margin-top: 4px;
 }
 
+.topNavTabsWrap {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(400px, 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.topNavTabsWrap .topNavTabs {
+  pointer-events: auto;
+}
+
 .topNavTabs {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1;
   gap: clamp(18px, 4vw, 56px);
 }
 
@@ -185,6 +201,48 @@ body {
   display: flex;
   align-items: flex-start;
   gap: 14px;
+}
+
+.experienceCardToggle {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin: -6px -6px -6px auto;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.experienceCardToggle:hover {
+  color: var(--text);
+  background: rgba(17, 17, 17, 0.06);
+}
+
+.experienceCardToggle:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.experienceCardChevron {
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.experienceCardChevronExpanded {
+  transform: rotate(180deg);
+}
+
+.experienceCardDivider {
+  height: 1px;
+  width: 100%;
+  background: rgba(17, 17, 17, 0.1);
+  margin: 14px 0 0;
 }
 
 .experienceCardLogo {
