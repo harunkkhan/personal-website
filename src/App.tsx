@@ -1,5 +1,5 @@
 import SocialIconLink from "./components/SocialIconLink";
-import { EmailIcon, GitHubIcon, InstagramIcon, LinkedInIcon, XIcon } from "./components/icons";
+import { EmailIcon, GitHubIcon, InstagramIcon, LinkedInIcon, SubstackIcon, XIcon } from "./components/icons";
 import { useEffect, useMemo, useState } from "react";
 
 type Tab = "home" | "experience" | "projects" | "contact";
@@ -106,6 +106,11 @@ export default function App() {
                 href="https://x.com/harun.k.khan"
                 label="harunkanwalkhan"
                 icon={<XIcon />}
+              />
+              <SocialIconLink
+                href="https://substack.com/@harunkhan"
+                label="Substack"
+                icon={<SubstackIcon />}
               />
             </div>
           </div>
