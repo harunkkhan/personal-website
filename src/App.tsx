@@ -72,7 +72,7 @@ export default function App() {
           institution: "Leidos",
           title: "Software Engineering Intern",
           dates: "Jun 2025 - Aug 2025",
-          body: "Gunnery Training Simulations (GTS) for the US Military",
+          body: "Gunnery Training Systems (GTS) for the US Military",
         },
         
       ];
