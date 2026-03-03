@@ -109,7 +109,7 @@ export default function App() {
               />
               <SocialIconLink
                 href="https://substack.com/@harunkhan"
-                label="Substack"
+                label="harunkhan"
                 icon={<SubstackIcon />}
               />
             </div>
