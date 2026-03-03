@@ -92,14 +92,14 @@ export default function App() {
           institution: "US Securities & Exchange Commission",
           title: "Spring Analyst",
           dates: "Feb 2026 - Present",
-          body: "Division of Economic & Risk Analysis - Office of Asset Management",
+          body: "Division of Economic & Risk Analysis - Office of Asset Management; Youngest Intern at SEC",
         },
         {
           logo: "leidos-logo.png",
           institution: "Leidos",
           title: "Software Engineering Intern",
           dates: "Jun 2025 - Aug 2025",
-          body: "Gunnery Training Systems (GTS) for the US Military",
+          body: "Gunnery Training Systems (GTS) for the US Military; Straight out of HS",
         },
         
       ];
