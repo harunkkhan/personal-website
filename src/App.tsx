@@ -89,7 +89,7 @@ export default function App() {
       }> = [
         {
           logo: "sec-logo.png",
-          institution: "United States Securities & Exchange Commission",
+          institution: "US Securities & Exchange Commission",
           title: "Spring Analyst",
           dates: "Feb 2026 - Present",
           body: "Division of Economic & Risk Analysis - Office of Asset Management",
