@@ -110,12 +110,8 @@ body {
 }
 
 .content {
-  width: min(560px, 100%);
+  width: min(400px, 100%);
   text-align: left;
-}
-
-.contentHome {
-  width: min(760px, 100%);
 }
 
 .homeIntro {
@@ -136,8 +132,8 @@ body {
 
 .homePhoto img {
   display: block;
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   object-fit: cover;
   border-radius: 12px;
 }
