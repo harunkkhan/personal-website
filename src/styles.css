@@ -67,7 +67,7 @@ body {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  width: min(400px, 100%);
+  width: min(560px, 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -125,7 +125,7 @@ body {
 }
 
 .content {
-  width: min(400px, 100%);
+  width: min(560px, 100%);
   text-align: left;
 }
 
