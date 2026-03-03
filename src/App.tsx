@@ -42,6 +42,18 @@ export default function App() {
 
   const content = (() => {
     if (activeTab === "experience") {
+      const experience = [
+        {
+          title: "___",
+          org: "___",
+          dates: "___",
+          description: [
+            "___",
+          ],
+          logoUrl: null as string | null,
+        },
+        // Add more entries here
+      ];
       return (
         <section className="content" aria-label="Experience">
           <h2 className="pageTitle">Experience</h2>
@@ -50,7 +62,40 @@ export default function App() {
           </p>
           <div className="pageDivider" />
           <div className="pageBody">
-            <p className="sectionBody"></p>
+            <div className="experienceList">
+              {experience.map((job, i) => (
+                <article key={i} className="experienceCard">
+                  <div className="experienceCardTop">
+                    {job.logoUrl ? (
+                      <img
+                        src={job.logoUrl}
+                        alt=""
+                        className="experienceCardLogo"
+                        width={48}
+                        height={48}
+                      />
+                    ) : (
+                      <div className="experienceCardLogo experienceCardLogoPlaceholder">
+                        {job.org.slice(0, 2)}
+                      </div>
+                    )}
+                    <div className="experienceCardHeader">
+                      <h3 className="experienceCardTitle">{job.title}</h3>
+                      <p className="experienceCardMeta">
+                        {job.org} | {job.dates}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="experienceCardDescription">
+                    <ul className="experienceCardList">
+                      {job.description.map((line, j) => (
+                        <li key={j}>{line}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
       );

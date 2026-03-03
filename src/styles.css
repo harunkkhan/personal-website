@@ -162,6 +162,87 @@ body {
   margin-top: 0;
 }
 
+.experienceList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.experienceCard {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  background: rgba(17, 17, 17, 0.06);
+  border-radius: 12px;
+  padding: 18px 20px;
+  border: 1px solid rgba(17, 17, 17, 0.08);
+}
+
+.experienceCardTop {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.experienceCardLogo {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.experienceCardLogoPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(17, 17, 17, 0.12);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.experienceCardHeader {
+  min-width: 0;
+}
+
+.experienceCardTitle {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.experienceCardMeta {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.experienceCardDescription {
+  margin-left: 0;
+}
+
+.experienceCardList {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.experienceCardList li {
+  margin-bottom: 6px;
+}
+
+.experienceCardList li:last-child {
+  margin-bottom: 0;
+}
+
 .contactBlock {
   margin-top: 28px;
 }
