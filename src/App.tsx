@@ -103,7 +103,7 @@ export default function App() {
                 icon={<InstagramIcon />}
               />
               <SocialIconLink
-                href="https://x.com/harun.k.khan"
+                href="https://x.com/harunkanwalkhan"
                 label="harunkanwalkhan"
                 icon={<XIcon />}
               />
