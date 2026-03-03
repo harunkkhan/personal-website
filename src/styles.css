@@ -284,16 +284,11 @@ body {
 
 .experienceCardBody {
   margin: 14px 0 0;
-  padding-left: 62px;
+  padding-left: 0;
   color: var(--muted);
   font-size: 11px;
   line-height: 1.5;
-}
-
-@media (max-width: 420px) {
-  .experienceCardBody {
-    padding-left: 0;
-  }
+  text-align: left;
 }
 
 .contactBlock {

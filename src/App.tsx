@@ -61,12 +61,14 @@ export default function App() {
         body: string;
       }> = [
         {
+          logo: "sec-logo.png",
           institution: "United States Securities & Exchange Commission",
           title: "Spring Analyst",
           dates: "Feb 2026 - Present",
           body: "Division of Economic & Risk Analysis - Office of Asset Management",
         },
         {
+          logo: "leidos-logo.png",
           institution: "Leidos",
           title: "Software Engineering Intern",
           dates: "Jun 2025 - Aug 2025",
@@ -90,7 +92,7 @@ export default function App() {
                     <div className="experienceCardHeader">
                       {exp.logo ? (
                         <img
-                          src={exp.logo}
+                          src={`${import.meta.env.BASE_URL}${exp.logo}`}
                           alt=""
                           className="experienceCardLogo"
                           width={48}
