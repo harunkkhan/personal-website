@@ -180,6 +180,10 @@ export default function App() {
                 <EmailIcon />
                 <span className="iconLabel">harunkkhan1@gmail.com</span>
               </a>
+              <a href="mailto:harunkhaninquiries@gmail.com" className="iconLink">
+                <EmailIcon />
+                <span className="iconLabel">harunkhaninquiries@gmail.com</span>
+              </a>
               <a href="mailto:hkhan71@gmu.edu" className="iconLink">
                 <EmailIcon />
                 <span className="iconLabel">hkhan71@gmu.edu</span>
