@@ -55,6 +55,19 @@ export default function App() {
           dates: "__",
           body: "__",
         },
+        {
+          institution: "__",
+          title: "__",
+          dates: "__",
+          body: "__",
+        },
+        {
+          institution: "__",
+          title: "__",
+          dates: "__",
+          body: "__",
+        },
+        
       ];
       return (
         <section className="content" aria-label="Experience">
