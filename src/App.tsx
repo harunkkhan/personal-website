@@ -9,13 +9,14 @@ type EducationSubTab = "education" | "extracurriculars" | "programs" | "awards";
 function normalizeTab(hash: string): Tab {
   const raw = hash.replace(/^#/, "").trim().toLowerCase();
   switch (raw) {
+    case "home":
+    case "":
+      return "home";
     case "experience":
     case "education":
     case "projects":
     case "contact":
-      return raw;
-    case "home":
-    case "":
+      return "home";
     default:
       return "home";
   }
@@ -602,6 +603,10 @@ export default function App() {
               label="GitHub"
               icon={<GitHubIcon />}
             />
+            <a href="mailto:harunkkhan1@gmail.com" className="iconLink" aria-label="Email">
+              <EmailIcon />
+              <span className="iconLabel">harunkkhan1@gmail.com</span>
+            </a>
           </div>
         </div>
       </section>
@@ -612,12 +617,20 @@ export default function App() {
     <main className="page">
       <header className="topNav" aria-label="Primary navigation">
         <div className="topNavInner">
-          <a href="#" className="siteLogo" aria-label="Home">
+          <a
+            href="#"
+            className="siteLogo"
+            aria-label="Home"
+            onClick={(e) => {
+              e.preventDefault();
+              goToTab("home");
+            }}
+          >
             <img src={`${import.meta.env.BASE_URL}hk-logo.png`} alt="Harun Khan" width={44} height={44} />
           </a>
           <div className="topNavTabsWrap">
             <nav className="topNavTabs">
-          {tabs.map((t) => {
+          {tabs.filter(() => false).map((t) => {
             const isActive = t.id === activeTab;
             return (
               <a
