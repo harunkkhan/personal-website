@@ -227,11 +227,62 @@ body {
   height: 1px;
   width: 100%;
   background: rgba(17, 17, 17, 0.1);
-  margin: 24px 0 28px;
+  margin: 14px 0 18px;
+}
+
+.pageDividerTight {
+  margin-bottom: 8px;
 }
 
 .pageBody {
   margin-top: 0;
+}
+
+.homeBodyText {
+  margin-bottom: 20px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* harunkhan.org page */
+.harunkhanOrgProfile {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.harunkhanOrgPhoto {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.harunkhanOrgNameBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.harunkhanOrgInitials {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.harunkhanOrgName {
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.harunkhanOrgParagraph {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 15px;
 }
 
 /* Experience cards – stay within content width */
@@ -437,7 +488,7 @@ body {
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
-  gap: clamp(10px, 3vw, 14px);
+  gap: clamp(6px, 1.5vw, 10px);
   margin: 0 0 22px;
 }
 
@@ -488,6 +539,10 @@ body {
 @media (max-width: 480px) {
   .pageTitle {
     font-size: clamp(28px, 8vw, 34px);
+  }
+
+  .homeBodyText {
+    font-size: 14px;
   }
 
   .pageIntro {

@@ -1,8 +1,9 @@
 import SocialIconLink from "./components/SocialIconLink";
 import { EmailIcon, GitHubIcon, InstagramIcon, LinkedInIcon, SubstackIcon, XIcon } from "./components/icons";
+import HarunKhanOrgPage from "./pages/HarunKhanOrgPage";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-type Tab = "home" | "experience" | "education" | "projects" | "contact";
+type Tab = "home" | "harunkhan-org" | "experience" | "education" | "projects" | "contact";
 type ProjectsSubTab = "investment" | "cs" | "research";
 type EducationSubTab = "education" | "extracurriculars" | "programs" | "awards";
 
@@ -12,6 +13,8 @@ function normalizeTab(hash: string): Tab {
     case "home":
     case "":
       return "home";
+    case "harunkhan-org":
+      return "harunkhan-org";
     case "experience":
     case "education":
     case "projects":
@@ -27,6 +30,7 @@ export default function App() {
     () =>
       [
         { id: "home" as const, label: "Home" },
+        { id: "harunkhan-org" as const, label: "harunkhan.org" },
         { id: "experience" as const, label: "Experience" },
         { id: "education" as const, label: "Education" },
         { id: "projects" as const, label: "Projects" },
@@ -259,6 +263,10 @@ export default function App() {
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
+
+  useEffect(() => {
+    document.title = activeTab === "harunkhan-org" ? "harunkhan.org" : "Harun Khan";
+  }, [activeTab]);
 
   const goToTab = (tabId: Tab) => {
     skipNextHashChange.current = true;
@@ -572,6 +580,10 @@ export default function App() {
       );
     }
 
+    if (activeTab === "harunkhan-org") {
+      return <HarunKhanOrgPage />;
+    }
+
     return (
       <section className="content contentHome" aria-label="Home">
         <div className="homeIntro">
@@ -592,7 +604,15 @@ export default function App() {
         </div>
         <div className="pageDivider" />
         <div className="pageBody">
+          <p className="sectionBody homeBodyText">
+            ___
+          </p>
+          <div className="pageDivider pageDividerTight" />
           <div className="social" aria-label="Social links">
+            <a href="mailto:harunkkhan1@gmail.com" className="iconLink" aria-label="Email">
+              <EmailIcon />
+              <span className="iconLabel">harunkkhan1@gmail.com</span>
+            </a>
             <SocialIconLink
               href="https://www.linkedin.com/in/harun-k-khan/"
               label="LinkedIn"
@@ -603,10 +623,6 @@ export default function App() {
               label="GitHub"
               icon={<GitHubIcon />}
             />
-            <a href="mailto:harunkkhan1@gmail.com" className="iconLink" aria-label="Email">
-              <EmailIcon />
-              <span className="iconLabel">harunkkhan1@gmail.com</span>
-            </a>
           </div>
         </div>
       </section>
@@ -615,42 +631,44 @@ export default function App() {
 
   return (
     <main className="page">
-      <header className="topNav" aria-label="Primary navigation">
-        <div className="topNavInner">
-          <a
-            href="#"
-            className="siteLogo"
-            aria-label="Home"
-            onClick={(e) => {
-              e.preventDefault();
-              goToTab("home");
-            }}
-          >
-            <img src={`${import.meta.env.BASE_URL}hk-logo.png`} alt="Harun Khan" width={44} height={44} />
-          </a>
-          <div className="topNavTabsWrap">
-            <nav className="topNavTabs">
-          {tabs.filter(() => false).map((t) => {
-            const isActive = t.id === activeTab;
-            return (
-              <a
-                key={t.id}
-                className={`tab ${isActive ? "tabActive" : ""}`}
-                href={t.id === "home" ? "#" : `#${t.id}`}
-                aria-current={isActive ? "page" : undefined}
-                onClick={(e) => {
-                  e.preventDefault();
-                  goToTab(t.id);
-                }}
-              >
-                {t.label}
-              </a>
-            );
-          })}
-            </nav>
+      {activeTab !== "harunkhan-org" && (
+        <header className="topNav" aria-label="Primary navigation">
+          <div className="topNavInner">
+            <a
+              href="#"
+              className="siteLogo"
+              aria-label="Home"
+              onClick={(e) => {
+                e.preventDefault();
+                goToTab("home");
+              }}
+            >
+              <img src={`${import.meta.env.BASE_URL}hk-logo.png`} alt="Harun Khan" width={44} height={44} />
+            </a>
+            <div className="topNavTabsWrap">
+              <nav className="topNavTabs">
+                {tabs.filter((t) => t.id === "home" || t.id === "harunkhan-org").map((t) => {
+                  const isActive = t.id === activeTab;
+                  return (
+                    <a
+                      key={t.id}
+                      className={`tab ${isActive ? "tabActive" : ""}`}
+                      href={t.id === "home" ? "#" : `#${t.id}`}
+                      aria-current={isActive ? "page" : undefined}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        goToTab(t.id);
+                      }}
+                    >
+                      {t.label}
+                    </a>
+                  );
+                })}
+              </nav>
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
+      )}
 
       <div className="contentWrap">{content}</div>
     </main>
