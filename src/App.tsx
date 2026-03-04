@@ -11,17 +11,16 @@ function normalizeTab(hash: string): Tab {
   const raw = hash.replace(/^#/, "").trim().toLowerCase();
   switch (raw) {
     case "home":
-    case "":
       return "home";
     case "harunkhan-org":
       return "harunkhan-org";
+    case "":
     case "experience":
     case "education":
     case "projects":
     case "contact":
-      return "home";
     default:
-      return "home";
+      return "harunkhan-org";
   }
 }
 
@@ -271,7 +270,7 @@ export default function App() {
   const goToTab = (tabId: Tab) => {
     skipNextHashChange.current = true;
     setActiveTab(tabId);
-    window.location.hash = tabId === "home" ? "" : tabId;
+    window.location.hash = tabId === "harunkhan-org" ? "" : tabId;
   };
 
   const content = (() => {
@@ -637,10 +636,10 @@ export default function App() {
             <a
               href="#"
               className="siteLogo"
-              aria-label="Home"
+              aria-label="harunkhan.org"
               onClick={(e) => {
                 e.preventDefault();
-                goToTab("home");
+                goToTab("harunkhan-org");
               }}
             >
               <img src={`${import.meta.env.BASE_URL}hk-logo.png`} alt="Harun Khan" width={44} height={44} />
@@ -653,7 +652,7 @@ export default function App() {
                     <a
                       key={t.id}
                       className={`tab ${isActive ? "tabActive" : ""}`}
-                      href={t.id === "home" ? "#" : `#${t.id}`}
+                      href={t.id === "harunkhan-org" ? "#" : `#${t.id}`}
                       aria-current={isActive ? "page" : undefined}
                       onClick={(e) => {
                         e.preventDefault();
