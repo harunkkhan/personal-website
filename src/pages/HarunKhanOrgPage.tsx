@@ -2,24 +2,30 @@ import { useEffect, useRef, useState } from "react";
 import SocialIconLink from "../components/SocialIconLink";
 import { EmailIcon, GitHubIcon, LinkedInIcon } from "../components/icons";
 
+type PopupKind = "contact" | "gmu" | "sec" | "leidos" | null;
+
 export default function HarunKhanOrgPage() {
-  const [contactOpen, setContactOpen] = useState(false);
+  const [popupOpen, setPopupOpen] = useState<PopupKind>(null);
   const [popupStyle, setPopupStyle] = useState<{ top: number; width: number } | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const paragraphsRef = useRef<HTMLDivElement>(null);
+
+  const togglePopup = (kind: PopupKind) => {
+    setPopupOpen((current) => (current === kind ? null : kind));
+  };
 
   useEffect(() => {
-    if (!contactOpen || !sectionRef.current || !buttonRef.current) {
+    if (!popupOpen || !sectionRef.current || !paragraphsRef.current) {
       setPopupStyle(null);
       return;
     }
     const sectionRect = sectionRef.current.getBoundingClientRect();
-    const buttonRect = buttonRef.current.getBoundingClientRect();
+    const paragraphsRect = paragraphsRef.current.getBoundingClientRect();
     setPopupStyle({
-      top: buttonRect.bottom - sectionRect.top + 8,
+      top: paragraphsRect.bottom - sectionRect.top + 8,
       width: sectionRect.width,
     });
-  }, [contactOpen]);
+  }, [popupOpen]);
 
   return (
     <section ref={sectionRef} className="content contentHarunkhanOrg" aria-label="harunkhan.org">
@@ -37,32 +43,43 @@ export default function HarunKhanOrgPage() {
         </div>
       </div>
       <div className="pageDivider" />
-      <div className="harunkhanOrgParagraphs">
+      <div ref={paragraphsRef} className="harunkhanOrgParagraphs">
         <p className="sectionBody harunkhanOrgParagraph">
           Pursuing opportunities elegantly simple, yet overlooked.
         </p>
         <p className="sectionBody harunkhanOrgParagraph">
           At{" "}
-          <a href="https://www.gmu.edu/" className="link" target="_blank" rel="noopener noreferrer">
+          <button
+            type="button"
+            className="link linkButton"
+            onClick={() => togglePopup("gmu")}
+          >
             GMU
-          </a>
+          </button>
           , exploring finance and tech. Building in public. Previously at the{" "}
-          <a href="https://www.sec.gov/" className="link" target="_blank" rel="noopener noreferrer">
+          <button
+            type="button"
+            className="link linkButton"
+            onClick={() => togglePopup("sec")}
+          >
             SEC
-          </a>{" "}
+          </button>{" "}
           and{" "}
-          <a href="https://www.leidos.com/" className="link" target="_blank" rel="noopener noreferrer">
+          <button
+            type="button"
+            className="link linkButton"
+            onClick={() => togglePopup("leidos")}
+          >
             Leidos
-          </a>
+          </button>
           .
         </p>
         <p className="sectionBody harunkhanOrgParagraph">
           DC area based. Feel free to{" "}
           <button
-            ref={buttonRef}
             type="button"
             className="link linkButton"
-            onClick={() => setContactOpen((open) => !open)}
+            onClick={() => togglePopup("contact")}
           >
             reach out
           </button>{" "}
@@ -70,27 +87,61 @@ export default function HarunKhanOrgPage() {
         </p>
       </div>
 
-      {contactOpen && popupStyle && (
+      {popupOpen && popupStyle && (
         <div
           className="harunkhanOrgPopupBox"
           role="dialog"
-          aria-label="Contact options"
+          aria-label={popupOpen === "contact" ? "Contact options" : "Link"}
           style={{ top: popupStyle.top, width: popupStyle.width }}
         >
-          <a href="mailto:harunkkhan1@gmail.com" className="iconLink" aria-label="Email">
-            <EmailIcon />
-            <span className="iconLabel">Email</span>
-          </a>
-          <SocialIconLink
-            href="https://www.linkedin.com/in/harun-k-khan/"
-            label="LinkedIn"
-            icon={<LinkedInIcon />}
-          />
-          <SocialIconLink
-            href="https://github.com/harunkkhan"
-            label="GitHub"
-            icon={<GitHubIcon />}
-          />
+          {popupOpen === "contact" && (
+            <>
+              <a href="mailto:harunkkhan1@gmail.com" className="iconLink" aria-label="Email">
+                <EmailIcon />
+                <span className="iconLabel">Email</span>
+              </a>
+              <SocialIconLink
+                href="https://www.linkedin.com/in/harun-k-khan/"
+                label="LinkedIn"
+                icon={<LinkedInIcon />}
+              />
+              <SocialIconLink
+                href="https://github.com/harunkkhan"
+                label="GitHub"
+                icon={<GitHubIcon />}
+              />
+            </>
+          )}
+          {popupOpen === "gmu" && (
+            <a
+              href="https://www.gmu.edu/"
+              className="iconLink"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              gmu.edu
+            </a>
+          )}
+          {popupOpen === "sec" && (
+            <a
+              href="https://www.sec.gov/"
+              className="iconLink"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              sec.gov
+            </a>
+          )}
+          {popupOpen === "leidos" && (
+            <a
+              href="https://www.leidos.com/"
+              className="iconLink"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              leidos.com
+            </a>
+          )}
         </div>
       )}
     </section>
