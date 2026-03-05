@@ -116,34 +116,24 @@ export default function HarunKhanOrgPage() {
             </>
           )}
           {popupOpen === "gmu" && (
-            <a
-              href="https://www.gmu.edu/"
-              className="iconLink"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              gmu.edu
-            </a>
+            <>
+              <span className="iconLink">
+                <span className="iconLabel">President of PatriotHacks</span>
+              </span>
+              <span className="iconLink">
+                <span className="iconLabel">Head of Training at SMIF</span>
+              </span>
+            </>
           )}
           {popupOpen === "sec" && (
-            <a
-              href="https://www.sec.gov/"
-              className="iconLink"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              sec.gov
-            </a>
+            <span className="iconLink">
+              <span className="iconLabel">Division of Economic & Risk Analysis - Office of Asset Management</span>
+            </span>
           )}
           {popupOpen === "leidos" && (
-            <a
-              href="https://www.leidos.com/"
-              className="iconLink"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              leidos.com
-            </a>
+            <span className="iconLink">
+              <span className="iconLabel">Gunnery Training Systems (GTS) for the US Military</span>
+            </span>
           )}
         </div>
       )}

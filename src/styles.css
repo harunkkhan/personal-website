@@ -281,7 +281,7 @@ body {
 .harunkhanOrgParagraphs {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
 }
 
 .harunkhanOrgParagraph {
@@ -289,6 +289,11 @@ body {
   color: var(--muted);
   line-height: 1.6;
   font-size: 15px;
+}
+
+.harunkhanOrgParagraph .link,
+.harunkhanOrgParagraph .linkButton {
+  font-size: inherit;
 }
 
 .linkButton {
@@ -309,6 +314,10 @@ body {
 
 .contentHarunkhanOrg {
   position: relative;
+}
+
+.contentHarunkhanOrg .sectionBody {
+  font-size: 15px;
 }
 
 .harunkhanOrgPopupBox {
