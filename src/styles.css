@@ -340,11 +340,15 @@ body {
 }
 
 .harunkhanOrgPageHeadlineRow {
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
   gap: 12px 20px;
   margin-top: 16px;
+}
+
+.harunkhanOrgPageHeadlineRow > .pageIntro {
+  min-width: 0;
 }
 
 .harunkhanOrgPageHeadlineCol {
@@ -363,9 +367,13 @@ body {
 
 .harunkhanOrgPageBody {
   margin: 12px 0 0;
-  font-size: 15px;
+  font-size: 13px;
   color: var(--muted);
   line-height: 1.6;
+}
+
+.harunkhanOrgPageBody .link {
+  font-size: inherit;
 }
 
 .harunkhanOrgPageBackAndLogo {
@@ -696,7 +704,7 @@ body {
   }
 
   .iconLabel {
-    font-size: 13px;
+    font-size: 12px;
   }
 }
 
