@@ -252,6 +252,25 @@ body {
   gap: 16px;
 }
 
+.harunkhanOrgPhotoLink {
+  display: block;
+  line-height: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.harunkhanOrgPhotoLink:hover {
+  opacity: 0.9;
+}
+
+.harunkhanOrgPhotoLink:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 10px;
+}
+
 .harunkhanOrgPhoto {
   width: 64px;
   height: 64px;
