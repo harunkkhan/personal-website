@@ -30,7 +30,10 @@ export default function ResearchPublicationsPage() {
             <span className="iconLabel">← Back</span>
           </a>
         </p>
-        <p className="harunkhanOrgPageHeadline">Research & Publications</p>
+        <div className="harunkhanOrgPageHeadlineCol">
+          <p className="harunkhanOrgPageHeadline">Research & Publications</p>
+          <p className="harunkhanOrgPageBody">Content coming soon.</p>
+        </div>
       </div>
     </section>
   );

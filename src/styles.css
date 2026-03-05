@@ -347,12 +347,25 @@ body {
   margin-top: 16px;
 }
 
+.harunkhanOrgPageHeadlineCol {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
 .harunkhanOrgPageHeadline {
   margin: 0;
   font-size: 15px;
   font-weight: 700;
   color: var(--text);
   line-height: 1.5;
+}
+
+.harunkhanOrgPageBody {
+  margin: 12px 0 0;
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.6;
 }
 
 .harunkhanOrgPageBackAndLogo {

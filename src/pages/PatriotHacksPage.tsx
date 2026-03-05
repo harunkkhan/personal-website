@@ -30,7 +30,10 @@ export default function PatriotHacksPage() {
             <span className="iconLabel">← Back</span>
           </a>
         </p>
-        <p className="harunkhanOrgPageHeadline">President of PatriotHacks</p>
+        <div className="harunkhanOrgPageHeadlineCol">
+          <p className="harunkhanOrgPageHeadline">President of PatriotHacks</p>
+          <p className="harunkhanOrgPageBody">Content coming soon.</p>
+        </div>
       </div>
     </section>
   );

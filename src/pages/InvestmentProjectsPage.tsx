@@ -30,7 +30,10 @@ export default function InvestmentProjectsPage() {
             <span className="iconLabel">← Back</span>
           </a>
         </p>
-        <p className="harunkhanOrgPageHeadline">Investment Projects</p>
+        <div className="harunkhanOrgPageHeadlineCol">
+          <p className="harunkhanOrgPageHeadline">Investment Projects</p>
+          <p className="harunkhanOrgPageBody">Content coming soon.</p>
+        </div>
       </div>
     </section>
   );

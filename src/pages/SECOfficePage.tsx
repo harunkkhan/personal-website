@@ -30,7 +30,10 @@ export default function SECOfficePage() {
             <span className="iconLabel">← Back</span>
           </a>
         </p>
-        <p className="harunkhanOrgPageHeadline">Spring Analyst at the US Securities & Exchange Commission</p>
+        <div className="harunkhanOrgPageHeadlineCol">
+          <p className="harunkhanOrgPageHeadline">Spring Analyst at the US Securities & Exchange Commission</p>
+          <p className="harunkhanOrgPageBody">Content coming soon.</p>
+        </div>
       </div>
     </section>
   );

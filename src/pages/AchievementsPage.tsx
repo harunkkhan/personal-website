@@ -30,7 +30,10 @@ export default function AchievementsPage() {
             <span className="iconLabel">← Back</span>
           </a>
         </p>
-        <p className="harunkhanOrgPageHeadline">Awards, Honors & Achievements</p>
+        <div className="harunkhanOrgPageHeadlineCol">
+          <p className="harunkhanOrgPageHeadline">Awards, Honors & Achievements</p>
+          <p className="harunkhanOrgPageBody">Content coming soon.</p>
+        </div>
       </div>
     </section>
   );
