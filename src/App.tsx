@@ -24,8 +24,8 @@ type Tab =
   | "achievements"
   | "patriothacks"
   | "smif"
-  | "sec-office"
-  | "leidos-gts";
+  | "sec"
+  | "leidos";
 type ProjectsSubTab = "investment" | "cs" | "research";
 type EducationSubTab = "education" | "extracurriculars" | "programs" | "awards";
 
@@ -48,10 +48,10 @@ function normalizeTab(hash: string): Tab {
       return "patriothacks";
     case "smif":
       return "smif";
-    case "sec-office":
-      return "sec-office";
-    case "leidos-gts":
-      return "leidos-gts";
+    case "sec":
+      return "sec";
+    case "leidos":
+      return "leidos";
     case "":
     case "experience":
     case "education":
@@ -309,8 +309,8 @@ export default function App() {
     else if (activeTab === "achievements") document.title = "Achievements — Harun Khan";
     else if (activeTab === "patriothacks") document.title = "PatriotHacks — Harun Khan";
     else if (activeTab === "smif") document.title = "SMIF — Harun Khan";
-    else if (activeTab === "sec-office") document.title = "SEC — Harun Khan";
-    else if (activeTab === "leidos-gts") document.title = "Leidos — Harun Khan";
+    else if (activeTab === "sec") document.title = "SEC — Harun Khan";
+    else if (activeTab === "leidos") document.title = "Leidos — Harun Khan";
     else document.title = "Harun Khan";
   }, [activeTab]);
 
@@ -648,10 +648,10 @@ export default function App() {
     if (activeTab === "smif") {
       return <SMIFPage />;
     }
-    if (activeTab === "sec-office") {
+    if (activeTab === "sec") {
       return <SECOfficePage />;
     }
-    if (activeTab === "leidos-gts") {
+    if (activeTab === "leidos") {
       return <LeidosGTSPage />;
     }
 
@@ -709,8 +709,8 @@ export default function App() {
         activeTab !== "achievements" &&
         activeTab !== "patriothacks" &&
         activeTab !== "smif" &&
-        activeTab !== "sec-office" &&
-        activeTab !== "leidos-gts" && (
+        activeTab !== "sec" &&
+        activeTab !== "leidos" && (
         <header className="topNav" aria-label="Primary navigation">
           <div className="topNavInner">
             <a

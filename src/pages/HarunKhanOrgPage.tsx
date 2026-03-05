@@ -159,7 +159,7 @@ export default function HarunKhanOrgPage() {
             </>
           )}
           {popupOpen === "sec" && (
-            <a href="#sec-office" className="iconLink">
+            <a href="#sec" className="iconLink">
               <img
                 src={`${import.meta.env.BASE_URL}sec-logo.png`}
                 alt=""
@@ -171,7 +171,7 @@ export default function HarunKhanOrgPage() {
             </a>
           )}
           {popupOpen === "leidos" && (
-            <a href="#leidos-gts" className="iconLink">
+            <a href="#leidos" className="iconLink">
               <img
                 src={`${import.meta.env.BASE_URL}leidos-logo.png`}
                 alt=""
