@@ -1,6 +1,6 @@
 export default function AchievementsPage() {
   return (
-    <section className="content contentHarunkhanOrg" aria-label="Achievements">
+    <section className="content contentHarunkhanOrg" aria-label="Awards">
       <div className="harunkhanOrgProfile">
         <button type="button" className="harunkhanOrgPhotoLink" aria-label="Profile photo">
           <img

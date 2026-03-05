@@ -32,7 +32,7 @@ export default function ResearchPublicationsPage() {
         </p>
         <div className="harunkhanOrgPageHeadlineCol">
           <p className="harunkhanOrgPageHeadline">Research & Publications</p>
-          <p className="harunkhanOrgPageBody">Content coming soon.</p>
+          <p className="harunkhanOrgPageBody">Coming soon...</p>
         </div>
       </div>
     </section>

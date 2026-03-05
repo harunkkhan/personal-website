@@ -32,7 +32,7 @@ export default function SMIFPage() {
         </p>
         <div className="harunkhanOrgPageHeadlineCol">
           <p className="harunkhanOrgPageHeadline">Head of Training at Montano Student Managed Investment Fund</p>
-          <p className="harunkhanOrgPageBody">Content coming soon.</p>
+          <p className="harunkhanOrgPageBody">Coming soon...</p>
         </div>
       </div>
     </section>

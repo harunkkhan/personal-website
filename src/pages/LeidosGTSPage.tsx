@@ -32,7 +32,7 @@ export default function LeidosGTSPage() {
         </p>
         <div className="harunkhanOrgPageHeadlineCol">
           <p className="harunkhanOrgPageHeadline">Software Engineering Intern at Leidos</p>
-          <p className="harunkhanOrgPageBody">Content coming soon.</p>
+          <p className="harunkhanOrgPageBody">Coming soon...</p>
         </div>
       </div>
     </section>

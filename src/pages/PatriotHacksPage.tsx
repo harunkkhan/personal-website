@@ -32,7 +32,7 @@ export default function PatriotHacksPage() {
         </p>
         <div className="harunkhanOrgPageHeadlineCol">
           <p className="harunkhanOrgPageHeadline">President of PatriotHacks</p>
-          <p className="harunkhanOrgPageBody">Content coming soon.</p>
+          <p className="harunkhanOrgPageBody">Coming soon...</p>
         </div>
       </div>
     </section>

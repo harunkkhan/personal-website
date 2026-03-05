@@ -1,6 +1,6 @@
-export default function SoftwareProjectsPage() {
+export default function InsightsPage() {
   return (
-    <section className="content contentHarunkhanOrg" aria-label="Software Projects">
+    <section className="content contentHarunkhanOrg" aria-label="Insights">
       <div className="harunkhanOrgProfile">
         <button type="button" className="harunkhanOrgPhotoLink" aria-label="Profile photo">
           <img
@@ -31,8 +31,13 @@ export default function SoftwareProjectsPage() {
           </a>
         </p>
         <div className="harunkhanOrgPageHeadlineCol">
-          <p className="harunkhanOrgPageHeadline">Software Projects</p>
-          <p className="harunkhanOrgPageBody">Coming soon...</p>
+          <p className="harunkhanOrgPageHeadline">Fellowships, Immersion & Insight Programs</p>
+          <div className="harunkhanOrgPageBody">
+            <p style={{ margin: "0 0 8px" }}>Expedition EY | Ernst & Young | 2026</p>
+            <p style={{ margin: "0 0 8px" }}>First Year Immersion Program | Oliver Wyman | 2026</p>
+            <p style={{ margin: "0 0 8px" }}>SIG Discovery Day | Susquehanna International Group | 2025</p>
+            <p style={{ margin: 0 }}>Don Lavoie Fellowship | The Mercatus Center | 2025</p>
+          </div>
         </div>
       </div>
     </section>

@@ -2,6 +2,7 @@ import SocialIconLink from "./components/SocialIconLink";
 import { EmailIcon, GitHubIcon, InstagramIcon, LinkedInIcon, SubstackIcon, XIcon } from "./components/icons";
 import AchievementsPage from "./pages/AchievementsPage";
 import HarunKhanOrgPage from "./pages/HarunKhanOrgPage";
+import InsightsPage from "./pages/InsightsPage";
 import InvestmentProjectsPage from "./pages/InvestmentProjectsPage";
 import LeidosGTSPage from "./pages/LeidosGTSPage";
 import PatriotHacksPage from "./pages/PatriotHacksPage";
@@ -22,6 +23,7 @@ type Tab =
   | "software-projects"
   | "research-publications"
   | "achievements"
+  | "insights"
   | "patriothacks"
   | "smif"
   | "sec"
@@ -44,6 +46,8 @@ function normalizeTab(hash: string): Tab {
       return "research-publications";
     case "achievements":
       return "achievements";
+    case "insights":
+      return "insights";
     case "patriothacks":
       return "patriothacks";
     case "smif":
@@ -306,7 +310,8 @@ export default function App() {
     else if (activeTab === "investment-projects") document.title = "Investment Projects — Harun Khan";
     else if (activeTab === "software-projects") document.title = "Software Projects — Harun Khan";
     else if (activeTab === "research-publications") document.title = "Research — Harun Khan";
-    else if (activeTab === "achievements") document.title = "Achievements — Harun Khan";
+    else if (activeTab === "achievements") document.title = "Awards — Harun Khan";
+    else if (activeTab === "insights") document.title = "Insights — Harun Khan";
     else if (activeTab === "patriothacks") document.title = "PatriotHacks — Harun Khan";
     else if (activeTab === "smif") document.title = "SMIF — Harun Khan";
     else if (activeTab === "sec") document.title = "SEC — Harun Khan";
@@ -642,6 +647,9 @@ export default function App() {
     if (activeTab === "achievements") {
       return <AchievementsPage />;
     }
+    if (activeTab === "insights") {
+      return <InsightsPage />;
+    }
     if (activeTab === "patriothacks") {
       return <PatriotHacksPage />;
     }
@@ -707,6 +715,7 @@ export default function App() {
         activeTab !== "software-projects" &&
         activeTab !== "research-publications" &&
         activeTab !== "achievements" &&
+        activeTab !== "insights" &&
         activeTab !== "patriothacks" &&
         activeTab !== "smif" &&
         activeTab !== "sec" &&

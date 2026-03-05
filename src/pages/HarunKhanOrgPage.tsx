@@ -194,7 +194,10 @@ export default function HarunKhanOrgPage() {
                 Research
               </a>
               <a href="#achievements" className="link">
-                Achievements
+                Awards
+              </a>
+              <a href="#insights" className="link">
+                Insights
               </a>
             </>
           )}
