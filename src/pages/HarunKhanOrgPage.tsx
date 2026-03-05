@@ -136,7 +136,7 @@ export default function HarunKhanOrgPage() {
           )}
           {popupOpen === "gmu" && (
             <>
-              <span className="iconLink">
+              <a href="#patriothacks" className="iconLink">
                 <img
                   src={`${import.meta.env.BASE_URL}patriothacks-logo.png`}
                   alt=""
@@ -145,8 +145,8 @@ export default function HarunKhanOrgPage() {
                   height={18}
                 />
                 <span className="iconLabel">President of PatriotHacks</span>
-              </span>
-              <span className="iconLink">
+              </a>
+              <a href="#smif" className="iconLink">
                 <img
                   src={`${import.meta.env.BASE_URL}smif-logo.png`}
                   alt=""
@@ -155,11 +155,11 @@ export default function HarunKhanOrgPage() {
                   height={18}
                 />
                 <span className="iconLabel">Head of Training at SMIF</span>
-              </span>
+              </a>
             </>
           )}
           {popupOpen === "sec" && (
-            <span className="iconLink">
+            <a href="#sec-office" className="iconLink">
               <img
                 src={`${import.meta.env.BASE_URL}sec-logo.png`}
                 alt=""
@@ -168,10 +168,10 @@ export default function HarunKhanOrgPage() {
                 height={18}
               />
               <span className="iconLabel">Division of Economic & Risk Analysis - Office of Asset Management</span>
-            </span>
+            </a>
           )}
           {popupOpen === "leidos" && (
-            <span className="iconLink">
+            <a href="#leidos-gts" className="iconLink">
               <img
                 src={`${import.meta.env.BASE_URL}leidos-logo.png`}
                 alt=""
@@ -180,7 +180,7 @@ export default function HarunKhanOrgPage() {
                 height={18}
               />
               <span className="iconLabel">Gunnery Training Systems (GTS) for the US Military</span>
-            </span>
+            </a>
           )}
           {popupOpen === "everything" && (
             <>
@@ -191,7 +191,10 @@ export default function HarunKhanOrgPage() {
                 Software Projects
               </a>
               <a href="#research-publications" className="link">
-                Research & Publications
+                Research
+              </a>
+              <a href="#achievements" className="link">
+                Achievements
               </a>
             </>
           )}

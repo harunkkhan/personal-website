@@ -1,8 +1,13 @@
 import SocialIconLink from "./components/SocialIconLink";
 import { EmailIcon, GitHubIcon, InstagramIcon, LinkedInIcon, SubstackIcon, XIcon } from "./components/icons";
+import AchievementsPage from "./pages/AchievementsPage";
 import HarunKhanOrgPage from "./pages/HarunKhanOrgPage";
 import InvestmentProjectsPage from "./pages/InvestmentProjectsPage";
+import LeidosGTSPage from "./pages/LeidosGTSPage";
+import PatriotHacksPage from "./pages/PatriotHacksPage";
 import ResearchPublicationsPage from "./pages/ResearchPublicationsPage";
+import SECOfficePage from "./pages/SECOfficePage";
+import SMIFPage from "./pages/SMIFPage";
 import SoftwareProjectsPage from "./pages/SoftwareProjectsPage";
 import { useEffect, useMemo, useRef, useState } from "react";
 
@@ -15,7 +20,12 @@ type Tab =
   | "contact"
   | "investment-projects"
   | "software-projects"
-  | "research-publications";
+  | "research-publications"
+  | "achievements"
+  | "patriothacks"
+  | "smif"
+  | "sec-office"
+  | "leidos-gts";
 type ProjectsSubTab = "investment" | "cs" | "research";
 type EducationSubTab = "education" | "extracurriculars" | "programs" | "awards";
 
@@ -32,6 +42,16 @@ function normalizeTab(hash: string): Tab {
       return "software-projects";
     case "research-publications":
       return "research-publications";
+    case "achievements":
+      return "achievements";
+    case "patriothacks":
+      return "patriothacks";
+    case "smif":
+      return "smif";
+    case "sec-office":
+      return "sec-office";
+    case "leidos-gts":
+      return "leidos-gts";
     case "":
     case "experience":
     case "education":
@@ -285,7 +305,12 @@ export default function App() {
     if (activeTab === "harunkhan-org") document.title = "harunkhan.org";
     else if (activeTab === "investment-projects") document.title = "Investment Projects — Harun Khan";
     else if (activeTab === "software-projects") document.title = "Software Projects — Harun Khan";
-    else if (activeTab === "research-publications") document.title = "Research & Publications — Harun Khan";
+    else if (activeTab === "research-publications") document.title = "Research — Harun Khan";
+    else if (activeTab === "achievements") document.title = "Achievements — Harun Khan";
+    else if (activeTab === "patriothacks") document.title = "PatriotHacks — Harun Khan";
+    else if (activeTab === "smif") document.title = "SMIF — Harun Khan";
+    else if (activeTab === "sec-office") document.title = "SEC — Harun Khan";
+    else if (activeTab === "leidos-gts") document.title = "Leidos — Harun Khan";
     else document.title = "Harun Khan";
   }, [activeTab]);
 
@@ -614,6 +639,21 @@ export default function App() {
     if (activeTab === "research-publications") {
       return <ResearchPublicationsPage />;
     }
+    if (activeTab === "achievements") {
+      return <AchievementsPage />;
+    }
+    if (activeTab === "patriothacks") {
+      return <PatriotHacksPage />;
+    }
+    if (activeTab === "smif") {
+      return <SMIFPage />;
+    }
+    if (activeTab === "sec-office") {
+      return <SECOfficePage />;
+    }
+    if (activeTab === "leidos-gts") {
+      return <LeidosGTSPage />;
+    }
 
     return (
       <section className="content contentHome" aria-label="Home">
@@ -665,7 +705,12 @@ export default function App() {
       {activeTab !== "harunkhan-org" &&
         activeTab !== "investment-projects" &&
         activeTab !== "software-projects" &&
-        activeTab !== "research-publications" && (
+        activeTab !== "research-publications" &&
+        activeTab !== "achievements" &&
+        activeTab !== "patriothacks" &&
+        activeTab !== "smif" &&
+        activeTab !== "sec-office" &&
+        activeTab !== "leidos-gts" && (
         <header className="topNav" aria-label="Primary navigation">
           <div className="topNavInner">
             <a

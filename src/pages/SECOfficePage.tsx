@@ -1,6 +1,6 @@
-export default function ResearchPublicationsPage() {
+export default function SECOfficePage() {
   return (
-    <section className="content contentHarunkhanOrg" aria-label="Research">
+    <section className="content contentHarunkhanOrg" aria-label="SEC - Division of Economic & Risk Analysis">
       <div className="harunkhanOrgProfile">
         <button type="button" className="harunkhanOrgPhotoLink" aria-label="Profile photo">
           <img
