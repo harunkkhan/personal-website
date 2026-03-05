@@ -48,7 +48,7 @@ export default function HarunKhanOrgPage() {
           Building myself up one step at a time.
         </p>
         <p className="sectionBody harunkhanOrgParagraph">
-          At{" "}
+          Freshman at{" "}
           <button
             type="button"
             className="link linkButton"
