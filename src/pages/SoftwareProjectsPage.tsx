@@ -20,13 +20,13 @@ export default function SoftwareProjectsPage() {
       <p className="pageIntro" style={{ marginTop: 16 }}>
         <a
           href="#"
-          className="link"
+          className="iconLink"
           onClick={(e) => {
             e.preventDefault();
             window.location.hash = "";
           }}
         >
-          ← Back
+          <span className="iconLabel">← Back</span>
         </a>
       </p>
     </section>
