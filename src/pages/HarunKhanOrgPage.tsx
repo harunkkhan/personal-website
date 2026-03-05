@@ -86,7 +86,7 @@ export default function HarunKhanOrgPage() {
           >
             contact me
           </button>{" "}
-          - I love to chat.
+          - I love to chat!
         </p>
       </div>
 
