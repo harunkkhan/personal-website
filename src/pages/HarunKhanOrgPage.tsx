@@ -65,9 +65,9 @@ export default function HarunKhanOrgPage() {
             className="link linkButton"
             onClick={() => togglePopup("sec")}
           >
-            US Securities and Exchange Commission
+            SEC
           </button>{" "}
-          and previously at{" "}
+          & previously interned at{" "}
           <button
             type="button"
             className="link linkButton"
