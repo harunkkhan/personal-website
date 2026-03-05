@@ -32,7 +32,7 @@ export default function SECOfficePage() {
         </p>
         <div className="harunkhanOrgPageHeadlineCol">
           <p className="harunkhanOrgPageHeadline">Spring Analyst at the US Securities & Exchange Commission</p>
-          <p className="harunkhanOrgPageBody">Content coming soon.</p>
+          <p className="harunkhanOrgPageBody">Coming soon...</p>
         </div>
       </div>
     </section>
