@@ -45,7 +45,7 @@ export default function HarunKhanOrgPage() {
       <div className="pageDivider" />
       <div ref={paragraphsRef} className="harunkhanOrgParagraphs">
         <p className="sectionBody harunkhanOrgParagraph">
-          Pursuing opportunities elegantly simple, yet overlooked.
+          Building myself up one step at a time.
         </p>
         <p className="sectionBody harunkhanOrgParagraph">
           At{" "}
@@ -54,17 +54,20 @@ export default function HarunKhanOrgPage() {
             className="link linkButton"
             onClick={() => togglePopup("gmu")}
           >
-            GMU
+            George Mason University
           </button>
-          , exploring finance and tech. Building in public. Previously at the{" "}
+          , trying anything and everything.
+        </p>
+        <p className="sectionBody harunkhanOrgParagraph">
+          Currently the youngest intern at the{" "}
           <button
             type="button"
             className="link linkButton"
             onClick={() => togglePopup("sec")}
           >
-            SEC
+            US Securities and Exchange Commission
           </button>{" "}
-          and{" "}
+          and previously at{" "}
           <button
             type="button"
             className="link linkButton"
@@ -72,18 +75,18 @@ export default function HarunKhanOrgPage() {
           >
             Leidos
           </button>
-          .
+          , as a Software Engineering Intern straight out of high school.
         </p>
         <p className="sectionBody harunkhanOrgParagraph">
-          DC area based. Feel free to{" "}
+          Based in Northern VA (DC area). Feel free to{" "}
           <button
             type="button"
             className="link linkButton"
             onClick={() => togglePopup("contact")}
           >
-            reach out
+            contact me
           </button>{" "}
-          if you&apos;d like to chat.
+          - I love to chat.
         </p>
       </div>
 
