@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import SocialIconLink from "../components/SocialIconLink";
-import { EmailIcon, GitHubIcon, LinkedInIcon } from "../components/icons";
+import { EmailIcon, GitHubIcon, LinkedInIcon, SubstackIcon } from "../components/icons";
 
 type PopupKind = "contact" | "gmu" | "sec" | "leidos" | null;
 
@@ -65,9 +65,9 @@ export default function HarunKhanOrgPage() {
             className="link linkButton"
             onClick={() => togglePopup("sec")}
           >
-            SEC
+            SEC.
           </button>{" "}
-          & previously interned at{" "}
+          I previously worked as a Software Engineering Intern at{" "}
           <button
             type="button"
             className="link linkButton"
@@ -75,7 +75,7 @@ export default function HarunKhanOrgPage() {
           >
             Leidos
           </button>
-          , as a Software Engineering Intern straight out of high school.
+          , straight out of high school.
         </p>
         <p className="sectionBody harunkhanOrgParagraph">
           Based in Northern VA (DC area). Feel free to{" "}
@@ -113,25 +113,58 @@ export default function HarunKhanOrgPage() {
                 label="GitHub"
                 icon={<GitHubIcon />}
               />
+              <SocialIconLink
+                href="https://substack.com/@harunkhan"
+                label="Substack"
+                icon={<SubstackIcon />}
+              />
             </>
           )}
           {popupOpen === "gmu" && (
             <>
               <span className="iconLink">
+                <img
+                  src={`${import.meta.env.BASE_URL}patriothacks-logo.png`}
+                  alt=""
+                  className="icon"
+                  width={18}
+                  height={18}
+                />
                 <span className="iconLabel">President of PatriotHacks</span>
               </span>
               <span className="iconLink">
+                <img
+                  src={`${import.meta.env.BASE_URL}smif-logo.png`}
+                  alt=""
+                  className="icon"
+                  width={18}
+                  height={18}
+                />
                 <span className="iconLabel">Head of Training at SMIF</span>
               </span>
             </>
           )}
           {popupOpen === "sec" && (
             <span className="iconLink">
+              <img
+                src={`${import.meta.env.BASE_URL}sec-logo.png`}
+                alt=""
+                className="icon"
+                width={18}
+                height={18}
+              />
               <span className="iconLabel">Division of Economic & Risk Analysis - Office of Asset Management</span>
             </span>
           )}
           {popupOpen === "leidos" && (
             <span className="iconLink">
+              <img
+                src={`${import.meta.env.BASE_URL}leidos-logo.png`}
+                alt=""
+                className="icon"
+                width={18}
+                height={18}
+              />
               <span className="iconLabel">Gunnery Training Systems (GTS) for the US Military</span>
             </span>
           )}

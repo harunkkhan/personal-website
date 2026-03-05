@@ -567,6 +567,10 @@ body {
   display: block;
 }
 
+.harunkhanOrgPopupBox .icon {
+  object-fit: contain;
+}
+
 .iconLabel {
   font-size: 14px;
   color: rgba(17, 17, 17, 0.75);
