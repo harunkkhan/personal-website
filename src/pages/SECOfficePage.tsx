@@ -17,18 +17,21 @@ export default function SECOfficePage() {
         </div>
       </div>
       <div className="pageDivider" />
-      <p className="pageIntro" style={{ marginTop: 16 }}>
-        <a
-          href="#"
-          className="iconLink"
-          onClick={(e) => {
-            e.preventDefault();
-            window.location.hash = "";
-          }}
-        >
-          <span className="iconLabel">← Back</span>
-        </a>
-      </p>
+      <div className="harunkhanOrgPageHeadlineRow">
+        <p className="pageIntro" style={{ margin: 0 }}>
+          <a
+            href="#"
+            className="iconLink"
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.hash = "";
+            }}
+          >
+            <span className="iconLabel">← Back</span>
+          </a>
+        </p>
+        <p className="harunkhanOrgPageHeadline">Spring Analyst at the US Securities & Exchange Commission</p>
+      </div>
     </section>
   );
 }
