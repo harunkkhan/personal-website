@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import SocialIconLink from "../components/SocialIconLink";
 import { EmailIcon, GitHubIcon, LinkedInIcon, SubstackIcon } from "../components/icons";
 
-type PopupKind = "contact" | "gmu" | "sec" | "leidos" | null;
+type PopupKind = "contact" | "gmu" | "sec" | "leidos" | "everything" | null;
 
 export default function HarunKhanOrgPage() {
   const [popupOpen, setPopupOpen] = useState<PopupKind>(null);
@@ -62,7 +62,15 @@ export default function HarunKhanOrgPage() {
           >
             George Mason University
           </button>
-          , trying anything and everything.
+          , trying anything and{" "}
+          <button
+            type="button"
+            className="link linkButton"
+            onClick={() => togglePopup("everything")}
+          >
+            everything
+          </button>
+          .
         </p>
         <p className="sectionBody harunkhanOrgParagraph">
           Currently the youngest intern at the{" "}
@@ -173,6 +181,19 @@ export default function HarunKhanOrgPage() {
               />
               <span className="iconLabel">Gunnery Training Systems (GTS) for the US Military</span>
             </span>
+          )}
+          {popupOpen === "everything" && (
+            <>
+              <span className="iconLink">
+                <span className="iconLabel">Investment Projects</span>
+              </span>
+              <span className="iconLink">
+                <span className="iconLabel">Software Projects</span>
+              </span>
+              <span className="iconLink">
+                <span className="iconLabel">Research & Publications</span>
+              </span>
+            </>
           )}
         </div>
       )}
