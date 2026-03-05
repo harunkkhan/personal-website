@@ -30,7 +30,7 @@ export default function SMIFPage() {
             <span className="iconLabel">← Back</span>
           </a>
         </p>
-        <p className="harunkhanOrgPageHeadline">Head of Training at SMIF</p>
+        <p className="harunkhanOrgPageHeadline">Head of Training at Montano Student Managed Investment Fund</p>
       </div>
     </section>
   );
