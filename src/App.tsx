@@ -1,9 +1,21 @@
 import SocialIconLink from "./components/SocialIconLink";
 import { EmailIcon, GitHubIcon, InstagramIcon, LinkedInIcon, SubstackIcon, XIcon } from "./components/icons";
 import HarunKhanOrgPage from "./pages/HarunKhanOrgPage";
+import InvestmentProjectsPage from "./pages/InvestmentProjectsPage";
+import ResearchPublicationsPage from "./pages/ResearchPublicationsPage";
+import SoftwareProjectsPage from "./pages/SoftwareProjectsPage";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-type Tab = "home" | "harunkhan-org" | "experience" | "education" | "projects" | "contact";
+type Tab =
+  | "home"
+  | "harunkhan-org"
+  | "experience"
+  | "education"
+  | "projects"
+  | "contact"
+  | "investment-projects"
+  | "software-projects"
+  | "research-publications";
 type ProjectsSubTab = "investment" | "cs" | "research";
 type EducationSubTab = "education" | "extracurriculars" | "programs" | "awards";
 
@@ -14,6 +26,12 @@ function normalizeTab(hash: string): Tab {
       return "home";
     case "harunkhan-org":
       return "harunkhan-org";
+    case "investment-projects":
+      return "investment-projects";
+    case "software-projects":
+      return "software-projects";
+    case "research-publications":
+      return "research-publications";
     case "":
     case "experience":
     case "education":
@@ -264,7 +282,11 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    document.title = activeTab === "harunkhan-org" ? "harunkhan.org" : "Harun Khan";
+    if (activeTab === "harunkhan-org") document.title = "harunkhan.org";
+    else if (activeTab === "investment-projects") document.title = "Investment Projects — Harun Khan";
+    else if (activeTab === "software-projects") document.title = "Software Projects — Harun Khan";
+    else if (activeTab === "research-publications") document.title = "Research & Publications — Harun Khan";
+    else document.title = "Harun Khan";
   }, [activeTab]);
 
   const goToTab = (tabId: Tab) => {
@@ -583,6 +605,16 @@ export default function App() {
       return <HarunKhanOrgPage />;
     }
 
+    if (activeTab === "investment-projects") {
+      return <InvestmentProjectsPage />;
+    }
+    if (activeTab === "software-projects") {
+      return <SoftwareProjectsPage />;
+    }
+    if (activeTab === "research-publications") {
+      return <ResearchPublicationsPage />;
+    }
+
     return (
       <section className="content contentHome" aria-label="Home">
         <div className="homeIntro">
@@ -630,7 +662,10 @@ export default function App() {
 
   return (
     <main className="page">
-      {activeTab !== "harunkhan-org" && (
+      {activeTab !== "harunkhan-org" &&
+        activeTab !== "investment-projects" &&
+        activeTab !== "software-projects" &&
+        activeTab !== "research-publications" && (
         <header className="topNav" aria-label="Primary navigation">
           <div className="topNavInner">
             <a

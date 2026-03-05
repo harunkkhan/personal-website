@@ -184,15 +184,15 @@ export default function HarunKhanOrgPage() {
           )}
           {popupOpen === "everything" && (
             <>
-              <span className="iconLink">
+              <a href="#investment-projects" className="iconLink">
                 <span className="iconLabel">Investment Projects</span>
-              </span>
-              <span className="iconLink">
+              </a>
+              <a href="#software-projects" className="iconLink">
                 <span className="iconLabel">Software Projects</span>
-              </span>
-              <span className="iconLink">
+              </a>
+              <a href="#research-publications" className="iconLink">
                 <span className="iconLabel">Research & Publications</span>
-              </span>
+              </a>
             </>
           )}
         </div>
