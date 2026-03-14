@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import SocialIconLink from "../components/SocialIconLink";
-import { EmailIcon, GitHubIcon, LinkedInIcon, SubstackIcon } from "../components/icons";
+import { EmailIcon, GitHubIcon, LinkedInIcon, SubstackIcon, XIcon } from "../components/icons";
 
 type PopupKind = "contact" | "gmu" | "sec" | "leidos" | "everything" | null;
 
@@ -121,6 +121,11 @@ export default function HarunKhanOrgPage() {
                 href="https://www.linkedin.com/in/harun-k-khan/"
                 label="LinkedIn"
                 icon={<LinkedInIcon />}
+              />
+              <SocialIconLink
+                href="https://x.com/harunkanwalkhan"
+                label="X"
+                icon={<XIcon />}
               />
               <SocialIconLink
                 href="https://github.com/harunkkhan"
