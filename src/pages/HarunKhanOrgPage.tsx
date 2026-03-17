@@ -54,42 +54,10 @@ export default function HarunKhanOrgPage() {
           Building myself up one step at a time.
         </p>
         <p className="sectionBody harunkhanOrgParagraph">
-          Freshman at{" "}
-          <button
-            type="button"
-            className="link linkButton"
-            onClick={() => togglePopup("gmu")}
-          >
-            George Mason University
-          </button>
-          , trying anything and{" "}
-          <button
-            type="button"
-            className="link linkButton"
-            onClick={() => togglePopup("everything")}
-          >
-            everything
-          </button>
-          .
+          Freshman at George Mason University, trying anything and everything.
         </p>
         <p className="sectionBody harunkhanOrgParagraph">
-          Currently the youngest intern at the{" "}
-          <button
-            type="button"
-            className="link linkButton"
-            onClick={() => togglePopup("sec")}
-          >
-            SEC.
-          </button>{" "}
-          I previously worked as a Software Engineering Intern at{" "}
-          <button
-            type="button"
-            className="link linkButton"
-            onClick={() => togglePopup("leidos")}
-          >
-            Leidos
-          </button>
-          , straight out of high school.
+          Currently the youngest intern at the SEC. I previously worked as a Software Engineering Intern at Leidos, straight out of high school.
         </p>
         <p className="sectionBody harunkhanOrgParagraph">
           Based in Northern VA (DC area). Feel free to{" "}
