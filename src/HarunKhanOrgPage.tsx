@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import SocialIconLink from "../components/SocialIconLink";
-import { EmailIcon, GitHubIcon, LinkedInIcon, SubstackIcon, XIcon } from "../components/icons";
+import SocialIconLink from "./components/SocialIconLink";
+import { EmailIcon, GitHubIcon, LinkedInIcon, SubstackIcon, XIcon } from "./components/icons";
 
 type PopupKind = "contact" | "gmu" | "sec" | "leidos" | "everything" | null;
 
