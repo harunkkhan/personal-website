@@ -54,9 +54,6 @@ export default function HarunKhanOrgPage() {
           Building myself up one step at a time.
         </p>
         <p className="sectionBody harunkhanOrgParagraph">
-          Freshman at George Mason University, trying anything and everything.
-        </p>
-        <p className="sectionBody harunkhanOrgParagraph">
           Currently the youngest intern at the{" "}
           <a href="https://www.sec.gov/" className="link" target="_blank" rel="noopener noreferrer">
             SEC
@@ -75,8 +72,7 @@ export default function HarunKhanOrgPage() {
             onClick={() => togglePopup("contact")}
           >
             contact me
-          </button>{" "}
-          - I love to chat!
+          </button>.
         </p>
       </div>
 
