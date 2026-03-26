@@ -57,7 +57,15 @@ export default function HarunKhanOrgPage() {
           Freshman at George Mason University, trying anything and everything.
         </p>
         <p className="sectionBody harunkhanOrgParagraph">
-          Currently the youngest intern at the SEC. I previously worked as a Software Engineering Intern at Leidos, straight out of high school.
+          Currently the youngest intern at the{" "}
+          <a href="https://www.sec.gov/" className="link" target="_blank" rel="noopener noreferrer">
+            SEC
+          </a>
+          . I previously worked at{" "}
+          <a href="https://www.leidos.com/" className="link" target="_blank" rel="noopener noreferrer">
+            Leidos
+          </a>
+          , out of high school.
         </p>
         <p className="sectionBody harunkhanOrgParagraph">
           Based in Northern VA (DC area). Feel free to{" "}
