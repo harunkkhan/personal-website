@@ -51,9 +51,6 @@ export default function HarunKhanOrgPage() {
       <div className="pageDivider" />
       <div ref={paragraphsRef} className="harunkhanOrgParagraphs">
         <p className="sectionBody harunkhanOrgParagraph">
-          Building myself up one step at a time.
-        </p>
-        <p className="sectionBody harunkhanOrgParagraph">
           Currently the youngest intern at the{" "}
           <a href="https://www.sec.gov/" className="link" target="_blank" rel="noopener noreferrer">
             SEC
