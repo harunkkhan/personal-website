@@ -45,9 +45,9 @@ const PROJECTS: Project[] = [
       "Medical billing has been an ongoing, tedious task in healthcare. Providers have to deal with insurance companies, patients, and annoying admin work, which hasn't been properly solved yet.",
        "When back home for a week to celebrate my brother's high school graduation, some friends and I built Karev, the solution to medical billing, and its most annoying part: errors.",
   ],
-       href: "usekarev.com",
-    linkText: "",
-    sections: [{ heading: "", body: "" }],
+       href: "https://www.usekarev.com/",
+    linkText: "usekarev.com",
+    sections: [{ heading: "Coming soon...", body: "Coming soon..." }],
   },
   {
     title: "IT",
