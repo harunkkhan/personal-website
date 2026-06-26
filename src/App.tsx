@@ -1,4 +1,5 @@
 import HarunKhanOrgPage from "./HarunKhanOrgPage";
+import ProjectsPage from "./ProjectsPage";
 import { useEffect } from "react";
 
 export default function App() {
@@ -6,10 +7,13 @@ export default function App() {
     document.title = "harunkhan.org";
   }, []);
 
+  const path = window.location.pathname.replace(/\/+$/, "");
+  const isProjects = path === "/projects";
+
   return (
     <main className="page">
       <div className="contentWrap">
-        <HarunKhanOrgPage />
+        {isProjects ? <ProjectsPage /> : <HarunKhanOrgPage />}
       </div>
     </main>
   );
