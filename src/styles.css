@@ -97,7 +97,7 @@ body {
 /* Work / projects page */
 .projectsPage {
   width: 100%;
-  max-width: 1100px;
+  max-width: 620px;
   margin: 0 auto;
 }
 
@@ -108,7 +108,7 @@ body {
   border: none;
   background: none;
   font-family: inherit;
-  font-size: 15px;
+  font-size: 14px;
   color: var(--text);
   text-decoration: underline;
   text-decoration-thickness: 1px;
@@ -121,8 +121,8 @@ body {
 }
 
 .projectsHeading {
-  margin: 0 0 16px;
-  font-size: clamp(30px, 4vw, 44px);
+  margin: 0 0 14px;
+  font-size: clamp(22px, 2.6vw, 28px);
   font-weight: 600;
   letter-spacing: -0.01em;
 }
@@ -139,7 +139,7 @@ body {
   border: none;
   background: none;
   font-family: inherit;
-  font-size: 16px;
+  font-size: 14px;
   color: rgba(17, 17, 17, 0.45);
   cursor: pointer;
 }
@@ -155,42 +155,45 @@ body {
   text-underline-offset: 4px;
 }
 
-.projectsGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(20px, 3vw, 36px);
+.projectsList {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(17, 17, 17, 0.14);
 }
 
-.projectCard {
-  display: block;
+.projectRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
   width: 100%;
-  padding: 0;
+  padding: clamp(7px, 1.2vh, 11px) 0;
   border: none;
   background: none;
   font-family: inherit;
   text-align: left;
   color: var(--text);
-  text-decoration: none;
   cursor: pointer;
 }
 
-.projectCard:hover .projectCardImage {
-  opacity: 0.9;
+.projectRowTitle {
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 0.2s ease;
 }
 
-.projectCard:hover .projectCardImage img {
-  transform: scale(1.05);
+.projectRow:hover .projectRowTitle {
+  text-decoration-color: currentColor;
 }
 
-.projectCardImage {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  margin-bottom: 14px;
-  background: rgba(17, 17, 17, 0.06);
-  overflow: hidden;
+.projectRowYear {
+  flex-shrink: 0;
+  font-size: 13px;
+  color: rgba(17, 17, 17, 0.55);
 }
 
 .projectCardSoon {
@@ -207,43 +210,15 @@ body {
   letter-spacing: 0.01em;
 }
 
-.projectCardImage img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.3s ease;
-  object-fit: cover;
-}
-
-.projectCardTitle {
-  margin-bottom: 2px;
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-
-.projectCardYear {
-  font-size: 14px;
-  color: rgba(17, 17, 17, 0.55);
-}
-
-@media (max-width: 760px) {
-  .projectsGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .projectsGrid {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* Project detail view */
 .projectDetail {
   width: 100%;
-  max-width: 1000px;
+  max-width: 720px;
   margin: 0 auto;
+}
+
+.projectDetailHeader {
+  margin-bottom: clamp(28px, 5vh, 48px);
 }
 
 .projectDetailLayout {
@@ -278,9 +253,15 @@ body {
 }
 
 .projectDetailYear {
-  margin-bottom: 18px;
   font-size: 15px;
   color: rgba(17, 17, 17, 0.55);
+}
+
+.projectDetailHeading {
+  margin: 0 0 16px;
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .projectDetailBody {
@@ -291,11 +272,18 @@ body {
 }
 
 .projectDetailLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   color: var(--text);
+  font-size: 15px;
+  word-break: break-all;
+}
+
+.projectDetailLinkText {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
-  font-size: 15px;
 }
 
 .projectDetailLink:hover {
@@ -308,6 +296,10 @@ body {
   line-height: 1.6;
   color: rgba(17, 17, 17, 0.75);
   white-space: pre-wrap;
+}
+
+.projectDetailSection + .projectDetailSection {
+  margin-top: clamp(28px, 4vh, 48px);
 }
 
 .projectCrumb {
