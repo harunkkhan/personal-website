@@ -196,12 +196,6 @@ body {
   color: rgba(17, 17, 17, 0.55);
 }
 
-.projectCardSoon {
-  font-size: 14px;
-  color: rgba(17, 17, 17, 0.45);
-  letter-spacing: 0.01em;
-}
-
 .projectsSoon {
   margin-top: clamp(32px, 5vh, 56px);
   text-align: center;
@@ -219,30 +213,6 @@ body {
 
 .projectDetailHeader {
   margin-bottom: clamp(28px, 5vh, 48px);
-}
-
-.projectDetailLayout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(32px, 5vw, 64px);
-  align-items: center;
-}
-
-.projectDetailImage {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  background: rgba(17, 17, 17, 0.06);
-  overflow: hidden;
-}
-
-.projectDetailImage img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .projectDetailTitle {
@@ -334,11 +304,4 @@ body {
 
 .projectCrumbCurrent {
   color: var(--text);
-}
-
-@media (max-width: 720px) {
-  .projectDetailLayout {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
 }

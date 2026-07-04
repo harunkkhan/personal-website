@@ -11,7 +11,6 @@ type Project = {
   title: string;
   year: string;
   category: Category;
-  image?: string;
   href?: string;
   linkText?: string;
   heading?: string;
@@ -24,7 +23,6 @@ const PROJECTS: Project[] = [
     title: "Haladir",
     year: "2026",
     category: "experience",
-    image: "/haladir-logo.png",
     heading: "Haladir Summer 2026",
     description:
       "Spending my summer in San Francisco building Operational Superintelligence with the Haladir team. Most fun summer yet, working with some great friends and building a generational company.",
@@ -39,7 +37,6 @@ const PROJECTS: Project[] = [
     title: "Karev",
     year: "2026",
     category: "projects",
-    image: "/karev-logo.png",
     heading: "Medical Billing made simple?",
     description: [
       "Medical billing has been an ongoing, tedious task in healthcare. Providers have to deal with insurance companies, patients, and annoying admin work, which hasn't been properly solved yet.",
@@ -53,7 +50,6 @@ const PROJECTS: Project[] = [
     title: "IT",
     year: "2026",
     category: "projects",
-    image: "/internshiptracker-logo.svg",
     heading: "Tracking is Easier than ever",
     description: [
       "For the past year, I didn't track any internships I applied for. I know it's bad practice, but it was perfect for my system: See a Posting -> Click Apply. Whenever I had an interview, I would be on top of it. Thought I'd make a change this year; better to know metrics than not.",
@@ -76,7 +72,6 @@ const PROJECTS: Project[] = [
     title: "US Securities & Exchange Commission",
     year: "2026",
     category: "experience",
-    image: "/sec-logo.png",
     heading: "SEC Spring 2026",
     description:
     "I joined the US Securities and Exchange Commission (SEC) during my freshman spring, as their youngest intern, working full-time while taking classes. This was probably one of the most brutal experiences I've had, but what made it all worth it was the people and the work I was doing.",
@@ -96,7 +91,6 @@ const PROJECTS: Project[] = [
     title: "Leidos",
     year: "2025",
     category: "experience",
-    image: "/leidos-logo.png",
     heading: "Leidos Summer 2025",
     description: "I joined the Leidos team right after I graduated high school, working on software for low latency tank simulations on a contract for the US Army. This was my first proper SWE internship, and it was amazing working at a great company so early on.",
     href: "https://www.leidos.com/",
@@ -124,7 +118,6 @@ const PROJECTS: Project[] = [
     title: "Post-Wildfire Landslides",
     year: "2024",
     category: "projects",
-    image: "/postwildfire-landslides.png",
     heading: "Publishing my first Research Paper",
     description: "Coming soon...",
     href: "Coming soon...",
@@ -142,14 +135,6 @@ const toParagraphs = (
   placeholder: string,
 ): string[] =>
   value && value.length ? (Array.isArray(value) ? value : [value]) : [placeholder];
-
-function ProjectImage({ project }: { project: Project }) {
-  return project.image ? (
-    <img src={project.image} alt={project.title} />
-  ) : (
-    <span className="projectCardSoon">coming soon...</span>
-  );
-}
 
 export default function ProjectsPage() {
   const [selected, setSelected] = useState<number | null>(null);
@@ -198,33 +183,27 @@ export default function ProjectsPage() {
           <div className="projectDetailYear">{p.year || "[year]"}</div>
         </header>
 
-        <div className="projectDetailLayout">
-          <div className="projectDetailImage">
-            <ProjectImage project={p} />
-          </div>
+        <div className="projectDetailText">
+          <h2 className="projectDetailHeading">{p.heading || `[heading ${selected + 1}]`}</h2>
+          {paragraphs.map((para, i) => (
+            <p key={i} className="projectDetailBody">
+              {para}
+            </p>
+          ))}
 
-          <div className="projectDetailText">
-            <h2 className="projectDetailHeading">{p.heading || `[heading ${selected + 1}]`}</h2>
-            {paragraphs.map((para, i) => (
-              <p key={i} className="projectDetailBody">
-                {para}
-              </p>
+          {p.href !== undefined &&
+            (p.href ? (
+              <a
+                className="projectDetailLink"
+                href={p.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="projectDetailLinkText">{p.linkText || p.href}</span>
+              </a>
+            ) : (
+              <span className="projectDetailLink">[link {selected + 1}]</span>
             ))}
-
-            {p.href !== undefined &&
-              (p.href ? (
-                <a
-                  className="projectDetailLink"
-                  href={p.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="projectDetailLinkText">{p.linkText || p.href}</span>
-                </a>
-              ) : (
-                <span className="projectDetailLink">[link {selected + 1}]</span>
-              ))}
-          </div>
         </div>
 
         <div className="projectDetailMore">
