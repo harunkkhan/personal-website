@@ -237,23 +237,13 @@ body {
   color: rgba(17, 17, 17, 0.55);
 }
 
-.pubViewer {
-  width: 100%;
-  height: min(80vh, 1000px);
-  border: 1px solid rgba(17, 17, 17, 0.14);
-  background: rgba(17, 17, 17, 0.04);
+.pubLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(16px, 3vw, 28px);
 }
 
-.pubViewer iframe {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-.pubDownload {
-  display: inline-block;
-  margin-top: clamp(14px, 2.5vh, 20px);
+.pubLink {
   font-size: 14px;
   color: var(--text);
   text-decoration: underline;
@@ -261,7 +251,12 @@ body {
   text-underline-offset: 2px;
 }
 
-.pubDownload:hover {
+.pubLink:hover {
   opacity: 0.65;
+}
+
+.pubLinkPlaceholder {
+  color: rgba(17, 17, 17, 0.45);
+  text-decoration: none;
 }
 

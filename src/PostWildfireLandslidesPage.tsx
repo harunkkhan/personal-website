@@ -1,4 +1,5 @@
 const PDF_URL = "/postwildfirelandslides.pdf";
+const PUBLICATION_URL = "https://ieeexplore.ieee.org/document/10937631"; // add the publication link here
 
 export default function PostWildfireLandslidesPage() {
   return (
@@ -9,21 +10,32 @@ export default function PostWildfireLandslidesPage() {
 
       <header className="pubHeader">
         <h1 className="pubTitle">Post-Wildfire Landslides</h1>
-        <p className="pubMeta">MIT URTC 2024</p>
+        <p className="pubMeta">Published with MIT & IEEE, 2024</p>
       </header>
 
-      <div className="pubViewer">
-        <iframe src={PDF_URL} title="Post-Wildfire Landslides paper" />
-      </div>
+      <div className="pubLinks">
+        {PUBLICATION_URL ? (
+          <a
+            className="pubLink"
+            href={PUBLICATION_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            view publication ↗
+          </a>
+        ) : (
+          <span className="pubLink pubLinkPlaceholder">[publication link]</span>
+        )}
 
-      <a
-        className="pubDownload"
-        href={PDF_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        open pdf ↗
-      </a>
+        <a
+          className="pubLink"
+          href={PDF_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          view pdf ↗
+        </a>
+      </div>
     </section>
   );
 }
