@@ -213,3 +213,55 @@ body {
   letter-spacing: 0.01em;
 }
 
+/* Publication / PDF viewer page */
+.pubPage {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.pubHeader {
+  margin-bottom: clamp(16px, 3vh, 24px);
+}
+
+.pubTitle {
+  margin: 0 0 4px;
+  font-size: clamp(22px, 2.6vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.pubMeta {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(17, 17, 17, 0.55);
+}
+
+.pubViewer {
+  width: 100%;
+  height: min(80vh, 1000px);
+  border: 1px solid rgba(17, 17, 17, 0.14);
+  background: rgba(17, 17, 17, 0.04);
+}
+
+.pubViewer iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.pubDownload {
+  display: inline-block;
+  margin-top: clamp(14px, 2.5vh, 20px);
+  font-size: 14px;
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.pubDownload:hover {
+  opacity: 0.65;
+}
+

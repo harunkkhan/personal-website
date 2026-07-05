@@ -22,46 +22,50 @@ const PROJECTS: Project[] = [
     title: "Karev",
     year: "2026",
     category: "projects",
-    href: "https://www.usekarev.com/",
+    href: "usekarev.com",
     subheading: "",
   },
   {
     title: "IT",
     year: "2026",
     category: "projects",
-    href: "intern.harunkhan.org",
+    href: "https://github.com/harunkkhan/intern",
     subheading: "",
   },
   {
     title: "US Securities & Exchange Commission",
     year: "2026",
     category: "experience",
-    href: "https://www.sec.gov/",
+    href: "sec.gov",
     subheading: "",
   },
   {
     title: "Leidos",
     year: "2025",
     category: "experience",
-    href: "https://www.leidos.com/",
+    href: "leidos.com",
     subheading: "",
   },
   {
     title: "Post-Wildfire Landslides",
     year: "2024",
     category: "projects",
-    href: "",
+    href: "/postwildfirelandslides",
     subheading: "",
   },
 ];
 
 const CATEGORY_ORDER: Category[] = ["experience", "projects"];
 
-const asUrl = (href?: string): string | null => {
+const resolveHref = (
+  href?: string,
+): { url: string; external: boolean } | null => {
   const trimmed = href?.trim();
   if (!trimmed || /\s/.test(trimmed)) return null;
-  if (/^https?:\/\//i.test(trimmed)) return trimmed;
-  if (/^[\w-]+(\.[\w-]+)+/.test(trimmed)) return `https://${trimmed}`;
+  if (trimmed.startsWith("/")) return { url: trimmed, external: false };
+  if (/^https?:\/\//i.test(trimmed)) return { url: trimmed, external: true };
+  if (/^[\w-]+(\.[\w-]+)+/.test(trimmed))
+    return { url: `https://${trimmed}`, external: true };
   return null;
 };
 
@@ -99,16 +103,17 @@ export default function ProjectsPage() {
       <div className="projectsList">
         {PROJECTS.map((p, i) => {
           if (filter !== "all" && p.category !== filter) return null;
-          const url = asUrl(p.href);
+          const link = resolveHref(p.href);
           return (
             <div key={i} className="projectRow">
               <div className="projectRowHead">
-                {url ? (
+                {link ? (
                   <a
                     className="projectRowTitle projectRowTitleLink"
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={link.url}
+                    {...(link.external
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
                   >
                     {p.title || "[title]"}
                   </a>

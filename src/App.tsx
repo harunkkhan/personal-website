@@ -1,5 +1,6 @@
 import HarunKhanOrgPage from "./HarunKhanOrgPage";
 import ProjectsPage from "./ProjectsPage";
+import PostWildfireLandslidesPage from "./PostWildfireLandslidesPage";
 import { useEffect } from "react";
 
 export default function App() {
@@ -8,13 +9,16 @@ export default function App() {
   }, []);
 
   const path = window.location.pathname.replace(/\/+$/, "");
-  const isProjects = path === "/projects";
+
+  const renderPage = () => {
+    if (path === "/projects") return <ProjectsPage />;
+    if (path === "/postwildfirelandslides") return <PostWildfireLandslidesPage />;
+    return <HarunKhanOrgPage />;
+  };
 
   return (
     <main className="page">
-      <div className="contentWrap">
-        {isProjects ? <ProjectsPage /> : <HarunKhanOrgPage />}
-      </div>
+      <div className="contentWrap">{renderPage()}</div>
     </main>
   );
 }
