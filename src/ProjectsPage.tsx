@@ -19,6 +19,13 @@ const PROJECTS: Project[] = [
     subheading: "The Operational Superintelligence Company. Backed by YC, BoxGroup, Susa Ventures, SV Angel, and more. Joined as first hire in Summer 2026.",
   },
   {
+    title: "PatriotHacks",
+    year: "2026",
+    category: "projects",
+    href: "patriothacks.org",
+    subheading: "Hosted largest tech event in school history with 800+ attendees, raising $50K and sponsored by Microsoft, AWS, EY and more. Became president during freshman year.",
+  },
+  {
     title: "computeruse",
     year: "2026",
     category: "projects",
