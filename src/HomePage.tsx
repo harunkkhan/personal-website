@@ -3,14 +3,7 @@ import AsciiPortrait from "./AsciiPortrait";
 
 type Item = { label: string; href: string };
 
-const WORK: Item[] = [
-  { label: "haladir", href: "https://www.haladir.com/" },
-  { label: "karev", href: "https://usekarev.com" },
-  { label: "patriothacks", href: "https://patriothacks.org" },
-  { label: "computeruse", href: "https://github.com/harunkkhan/computeruse" },
-  { label: "post-wildfire landslides", href: "/postwildfirelandslides" },
-  { label: "work", href: "/projects" },
-];
+const WORK: Item[] = [{ label: "legacy", href: "/legacy" }];
 
 const SOCIAL: Item[] = [
   { label: "linkedin", href: "https://www.linkedin.com/in/harun-k-khan/" },
@@ -61,16 +54,8 @@ export default function HomePage() {
 
         <div className="footerBottom">
           <p className="bio">
-            harun khan is building operational superintelligence at{" "}
-            <Link href="https://www.haladir.com/">haladir</Link>. before that,
-            statistical inference at the{" "}
-            <Link href="https://www.sec.gov/">sec</Link> and software for low
-            latency tanks at <Link href="https://www.leidos.com/">leidos</Link>.
-            based in sf and nova. reach out at{" "}
-            <Link href="mailto:harunkkhan1@gmail.com">
-              harunkkhan1 [at] gmail [dot] com
-            </Link>
-            .
+            Love meeting interesting people! Feel free to reach out at{" "}
+            <Link href="mailto:harunkkhan1@gmail.com">harunkkhan1@gmail.com</Link>
           </p>
 
           <Row items={SOCIAL} />
