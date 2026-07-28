@@ -99,20 +99,20 @@ export default function ProjectsPage() {
   ];
 
   return (
-    <section className="subpage" aria-label="work">
-      <a className="back" href="/">
+    <section className="projectsPage" aria-label="work">
+      <a className="projectsHome" href="/">
         ← home
       </a>
 
-      <h1 className="subpageHeading">work</h1>
+      <h1 className="projectsHeading">work</h1>
 
-      <div className="filters">
+      <div className="projectsFilters">
         {filters.map((f) => (
           <button
             key={f}
             type="button"
             className={
-              "filter" + (filter === f ? " filterActive" : "")
+              "projectsFilter" + (filter === f ? " projectsFilterActive" : "")
             }
             onClick={() => setFilter(f)}
           >
@@ -121,16 +121,16 @@ export default function ProjectsPage() {
         ))}
       </div>
 
-      <div className="rows">
+      <div className="projectsList">
         {PROJECTS.map((p, i) => {
           if (filter !== "all" && p.category !== filter) return null;
           const link = resolveHref(p.href);
           return (
-            <div key={i} className="row">
-              <div className="rowHead">
+            <div key={i} className="projectRow">
+              <div className="projectRowHead">
                 {link ? (
                   <a
-                    className="rowTitle"
+                    className="projectRowTitle projectRowTitleLink"
                     href={link.url}
                     {...(link.external
                       ? { target: "_blank", rel: "noopener noreferrer" }
@@ -139,11 +139,11 @@ export default function ProjectsPage() {
                     {p.title || "[title]"}
                   </a>
                 ) : (
-                  <span className="rowTitle">{p.title || "[title]"}</span>
+                  <span className="projectRowTitle">{p.title || "[title]"}</span>
                 )}
-                <span className="rowYear">{p.year || "[year]"}</span>
+                <span className="projectRowYear">{p.year || "[year]"}</span>
               </div>
-              <p className="rowSub">
+              <p className="projectRowSub">
                 {p.subheading || `[brief info ${i + 1}]`}
               </p>
             </div>
@@ -151,7 +151,7 @@ export default function ProjectsPage() {
         })}
       </div>
 
-      <p className="note">more coming soon...</p>
+      <p className="projectsSoon">more coming soon...</p>
     </section>
   );
 }
