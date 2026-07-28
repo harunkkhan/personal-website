@@ -22,14 +22,14 @@ const CROP = { x0: 0, y0: 0, x1: 1, y1: 1 };
  * Grid size. Keep GW / GH close to the crop's aspect ratio so each cell covers a
  * roughly square patch of the photo and the letters can be drawn on square cells.
  */
-const GW = 58; // grid columns
-const GH = 68; // grid rows
+const GW = 52; // grid columns
+const GH = 61; // grid rows
 const LO_PCT = 0.18; // luminance percentile mapped to black — clamps the dead background
 const HI_PCT = 0.995; // ...and to white
 const GAMMA = 0.92;
 const SHARPEN = 0.85; // unsharp amount — pulls out brows, nose, lips
 const BLUR_R = 2; // unsharp blur radius, in cells
-const EDGE_FADE = 4.5; // cells over which brightness fades out at the frame edge
+const EDGE_FADE = 4; // cells over which brightness fades out at the frame edge
 const EDGE_FLOOR = 0.1; // brightness multiplier right at the edge
 
 /**

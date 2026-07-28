@@ -10,10 +10,10 @@ import { FACE_ALPHABET, FACE_ASPECT, FACE_H, FACE_ROWS, FACE_W } from "./faceDat
  * turn is a horizontal squash. Past edge-on the layout mirrors, so the letter
  * stream is re-laid right-to-left there and the name still reads forwards.
  *
- * Around the sheet, KHAN letters light up along the path the cursor has just
- * taken. There is no fixed shape to it: the streak follows the real trail, so it
- * curves as you curve, stretches when you move fast, and dissolves from the tail
- * back. The photo itself never reacts — the effect lives in the empty space.
+ * Around the sheet, KHAN letters light up in the empty space — trailing the
+ * cursor as it moves, and thrown up in a drifting puff when you click. Letters
+ * never move for either: they sit on a fixed lattice and only their brightness
+ * changes. The photo itself never reacts at all.
  */
 const IDLE_WORD = "HARUN ";
 const HOT_WORD = "KHAN"; // no trailing space — the streak runs KHANKHANKHAN
@@ -26,13 +26,13 @@ const SQUARE_UP = 1;
 const CELL_ASPECT = TRUE_CELL * SQUARE_UP;
 const FONT_RATIO = 0.88; // font size as a fraction of the row step
 /** Share of the stage the photo fills. Lower leaves more room around it. */
-const IMAGE_FIT = 0.87;
+const IMAGE_FIT = 0.74;
 const ROW_STEP_MIN = 4;
 const ROW_STEP_MAX = 20;
 
 // --- motion ----------------------------------------------------------------
-/** -1 turns counterclockwise as seen from above, +1 clockwise. */
-const SPIN_DIR = -1;
+/** +1 swings the sheet's right edge toward the viewer, -1 its left edge. */
+const SPIN_DIR = 1;
 const SPIN_SPEED = 0.19; // radians per second
 const EDGE_ON = 0.07; // below this much foreshortening the sheet is skipped
 const TURN_FADE = 0.55; // how sharply the sheet dims as it turns away
@@ -51,10 +51,7 @@ const MIN_ALPHA = 0.035; // below this a letter isn't drawn at all
 const BRIGHT_GAMMA = 1.8; // pushes the shadows back so the faces carry the read
 const SIZE_RANGE = 0.34; // brighter letters render slightly larger
 
-// --- the KHAN streak in the surrounding space -------------------------------
-// Built from a trail of recent cursor positions rather than from any fixed shape.
-// Letters sit on their own lattice at the photo's font size, tracked tight enough
-// horizontally that they butt up against each other.
+// --- the KHAN streak that trails the cursor ---------------------------------
 const HOT_TRACK = 0.68; // horizontal pitch as a fraction of font size — letters touch
 const HOT_LEAD = 1.2; // vertical pitch as a fraction of font size
 const HOT_WIDTH = 3.2; // radius at the head of the trail, in image row steps
@@ -69,7 +66,38 @@ const CURSOR_EASE = 12; // per second; lower trails further behind the pointer
 const SPEED_EASE = 6; // per second, for the speed the streak reads
 const TRAIL_STEP = 1.5; // px of movement before a new position is recorded
 
+// --- the puff a click or tap throws up --------------------------------------
+// Particles are simulated into a small offscreen buffer as soft additive blobs,
+// with the previous frame only partly wiped so they smear into trails. The letter
+// lattice then reads that buffer for brightness. Nothing is displaced — the cloud
+// drifting across the grid is what lights different letters at different moments.
+const PUFF_BUFFER_W = 400; // offscreen buffer width; height follows the canvas
+const PUFF_POOL = 640; // particles kept around, reused oldest-first
+const PUFF_COUNT = 80; // particles thrown per press
+const PUFF_SPRITE = 7; // soft glow radius, in buffer px
+const PUFF_SPEED_MIN = 1; // launch speed, buffer px per step
+const PUFF_SPEED_MAX = 3.5;
+const PUFF_JITTER = 4; // spawn scatter, in buffer px
+const PUFF_RISE = 0.5; // upward bias on launch, so the cloud lifts as it spreads
+const PUFF_GRAVITY = 0.015; // pulls it back down again, per step
+const PUFF_DRAG_MIN = 0.93; // per step; the spread slows as it goes
+const PUFF_DRAG_MAX = 0.98;
+const PUFF_LIFE_MIN = 40; // steps
+const PUFF_LIFE_MAX = 90;
+const PUFF_FADE = 0.35; // how much of the buffer is wiped each step
+const PUFF_ALPHA = 0.8; // sprite opacity at full life
+const PUFF_FLOOR = 0.025; // buffer brightness below which a letter stays dark
+const PUFF_GAIN = 1.35; // buffer brightness -> letter opacity
+const PUFF_STEP = 1 / 60; // the sim runs on a fixed clock, not on frame rate
+const PUFF_SETTLE = 24; // extra steps after the last particle, to fade the buffer
+
 const LEVELS = FACE_ALPHABET.length;
+
+/** Stable per-cell noise, so the streak's tail frays rather than fading as a block. */
+function jitter(i: number, j: number): number {
+  const n = Math.sin(i * 127.1 + j * 311.7) * 43758.5453;
+  return n - Math.floor(n);
+}
 
 type Point = {
   x: number; // cell widths from the centre of the sheet
@@ -121,12 +149,6 @@ const SIZE_BY_LEVEL = Array.from(
 );
 const GRID_W = FACE_W * CELL_ASPECT;
 
-/** Stable per-cell noise, so the tail breaks up rather than fading as a block. */
-function jitter(i: number, j: number): number {
-  const n = Math.sin(i * 127.1 + j * 311.7) * 43758.5453;
-  return n - Math.floor(n);
-}
-
 const smoothstep = (t: number) => t * t * (3 - 2 * t);
 
 // Cell indices packed into one integer for the heat map. The bias comfortably
@@ -136,6 +158,17 @@ const CELL_SPAN = CELL_BIAS * 2;
 const packCell = (i: number, j: number) => (i + CELL_BIAS) * CELL_SPAN + (j + CELL_BIAS);
 const unpackI = (key: number) => Math.floor(key / CELL_SPAN) - CELL_BIAS;
 const unpackJ = (key: number) => (key % CELL_SPAN) - CELL_BIAS;
+
+type Particle = {
+  x: number; // buffer coordinates
+  y: number;
+  vx: number;
+  vy: number;
+  life: number;
+  maxLife: number;
+  drag: number;
+  active: boolean;
+};
 
 export default function AsciiPortrait() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -151,6 +184,51 @@ export default function AsciiPortrait() {
     let width = 0;
     let height = 0;
 
+    // --- the puff's offscreen buffer and its glow sprite ------------------
+    const sprite = document.createElement("canvas");
+    sprite.width = sprite.height = PUFF_SPRITE * 2;
+    const spriteCtx = sprite.getContext("2d");
+    if (spriteCtx) {
+      const grad = spriteCtx.createRadialGradient(
+        PUFF_SPRITE,
+        PUFF_SPRITE,
+        0,
+        PUFF_SPRITE,
+        PUFF_SPRITE,
+        PUFF_SPRITE,
+      );
+      grad.addColorStop(0, "rgba(255,255,255,0.30)");
+      grad.addColorStop(0.4, "rgba(255,255,255,0.08)");
+      grad.addColorStop(1, "rgba(255,255,255,0)");
+      spriteCtx.fillStyle = grad;
+      spriteCtx.fillRect(0, 0, PUFF_SPRITE * 2, PUFF_SPRITE * 2);
+    }
+
+    const buffer = document.createElement("canvas");
+    const bufferCtx = buffer.getContext("2d", { willReadFrequently: true });
+    let bufferW = 0;
+    let bufferH = 0;
+    let bufferData: Uint8ClampedArray | null = null;
+
+    const particles: Particle[] = Array.from({ length: PUFF_POOL }, () => ({
+      x: 0,
+      y: 0,
+      vx: 0,
+      vy: 0,
+      life: 0,
+      maxLife: 1,
+      drag: 0.95,
+      active: false,
+    }));
+    let nextParticle = 0;
+    let settling = 0; // steps still owed after the last particle dies
+    let puffAccum = 0; // leftover time for the fixed-step sim
+    // screen-space bounds of the live cloud, so the lattice walk stays small
+    let puffMinX = 0;
+    let puffMaxX = 0;
+    let puffMinY = 0;
+    let puffMaxY = 0;
+
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
       const dpr = Math.min(2, window.devicePixelRatio || 1);
@@ -159,6 +237,14 @@ export default function AsciiPortrait() {
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      bufferW = PUFF_BUFFER_W;
+      bufferH = Math.max(1, Math.round((PUFF_BUFFER_W * height) / Math.max(1, width)));
+      buffer.width = bufferW;
+      buffer.height = bufferH;
+      bufferData = null;
+      for (const p of particles) p.active = false;
+      settling = 0;
     };
     resize();
 
@@ -177,6 +263,9 @@ export default function AsciiPortrait() {
     const trail: { x: number; y: number; t: number }[] = [];
     /** Reused between frames so the hot path doesn't allocate. */
     const heat = new Map<number, number>();
+    // the photo's on-screen half-extents, kept so a press can tell if it hit it
+    let photoHalfW = 0;
+    let photoHalfH = 0;
 
     const onMove = (event: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
@@ -194,8 +283,106 @@ export default function AsciiPortrait() {
       presenceTarget = 0;
     };
 
+    /** Throw a fresh cloud of particles from a point in canvas coordinates. */
+    const emitPuff = (sx: number, sy: number) => {
+      if (!bufferW || !bufferH) return;
+      const bx = (sx / width) * bufferW;
+      const by = (sy / height) * bufferH;
+      let made = 0;
+      for (let n = 0; n < particles.length && made < PUFF_COUNT; n++) {
+        const p = particles[nextParticle];
+        nextParticle = (nextParticle + 1) % particles.length;
+        if (p.active && p.life > 5) continue; // leave anything still going
+
+        // fan the launch angles around the circle, then rough them up
+        const angle = (made / PUFF_COUNT) * Math.PI * 2 + Math.random() * 0.5;
+        const speedOut = PUFF_SPEED_MIN + Math.random() * (PUFF_SPEED_MAX - PUFF_SPEED_MIN);
+        p.x = bx + (Math.random() - 0.5) * PUFF_JITTER;
+        p.y = by + (Math.random() - 0.5) * PUFF_JITTER;
+        p.vx = Math.cos(angle) * speedOut;
+        p.vy = Math.sin(angle) * speedOut - PUFF_RISE;
+        p.maxLife = PUFF_LIFE_MIN + Math.random() * (PUFF_LIFE_MAX - PUFF_LIFE_MIN);
+        p.life = p.maxLife;
+        p.drag = PUFF_DRAG_MIN + Math.random() * (PUFF_DRAG_MAX - PUFF_DRAG_MIN);
+        p.active = true;
+        made++;
+      }
+      settling = PUFF_SETTLE;
+    };
+
+    // pointerdown covers mouse, touch and pen in one go.
+    const onPress = (event: PointerEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      // A tap is the only pointer news a touch device sends, so seed from it too.
+      aimX = x;
+      aimY = y;
+      if (!seen) {
+        cursorX = x;
+        cursorY = y;
+        seen = true;
+      }
+      // the photo doesn't react, so a press landing on it does nothing
+      const onPhoto =
+        Math.abs(x - width / 2) < photoHalfW && Math.abs(y - height / 2) < photoHalfH;
+      if (!onPhoto) emitPuff(x, y);
+    };
+
     window.addEventListener("mousemove", onMove);
     document.addEventListener("mouseleave", onLeave);
+    window.addEventListener("pointerdown", onPress);
+
+    /**
+     * Advance the cloud one fixed step and redraw the buffer. The old frame is
+     * only partly wiped, which is what leaves the smeared trails behind each
+     * particle. Returns how many are still alive.
+     */
+    const stepPuff = () => {
+      if (!bufferCtx) return 0;
+      let alive = 0;
+      for (const p of particles) {
+        if (!p.active) continue;
+        p.life -= 1;
+        if (p.life <= 0) {
+          p.active = false;
+          continue;
+        }
+        p.vy += PUFF_GRAVITY;
+        p.vx *= p.drag;
+        p.vy *= p.drag;
+        p.x += p.vx;
+        p.y += p.vy;
+        alive++;
+      }
+
+      bufferCtx.fillStyle = `rgba(0,0,0,${PUFF_FADE})`;
+      bufferCtx.fillRect(0, 0, bufferW, bufferH);
+      bufferCtx.globalCompositeOperation = "lighter";
+      for (const p of particles) {
+        if (!p.active) continue;
+        bufferCtx.globalAlpha = (p.life / p.maxLife) * PUFF_ALPHA;
+        bufferCtx.drawImage(sprite, p.x - PUFF_SPRITE, p.y - PUFF_SPRITE);
+      }
+      bufferCtx.globalAlpha = 1;
+      bufferCtx.globalCompositeOperation = "source-over";
+      return alive;
+    };
+
+    /** Buffer brightness under a point in canvas coordinates, 0..1. */
+    const puffAt = (sx: number, sy: number) => {
+      if (!bufferData) return 0;
+      let bx = ((sx / width) * bufferW) | 0;
+      let by = ((sy / height) * bufferH) | 0;
+      if (bx < 0) bx = 0;
+      else if (bx >= bufferW) bx = bufferW - 1;
+      if (by < 0) by = 0;
+      else if (by >= bufferH) by = bufferH - 1;
+      const o = (by * bufferW + bx) * 4;
+      const v = (bufferData[o] + bufferData[o + 1] + bufferData[o + 2]) / 765;
+      if (v < PUFF_FLOOR) return 0;
+      return v > 1 ? 1 : v;
+    };
 
     // --- draw loop --------------------------------------------------------
     let raf = 0;
@@ -226,6 +413,45 @@ export default function AsciiPortrait() {
       }
       while (trail.length && t - trail[0].t > HOT_LIFE) trail.shift();
 
+      // --- run the puff on its own fixed clock ----------------------------
+      let puffLive = false;
+      let anyParticles = false;
+      for (const p of particles)
+        if (p.active) {
+          anyParticles = true;
+          break;
+        }
+      if (anyParticles || settling > 0) {
+        puffAccum = Math.min(puffAccum + dt, PUFF_STEP * 4); // never spiral
+        let stepped = false;
+        while (puffAccum >= PUFF_STEP) {
+          puffAccum -= PUFF_STEP;
+          const alive = stepPuff();
+          settling = alive > 0 ? PUFF_SETTLE : settling - 1;
+          stepped = true;
+        }
+        if (stepped && bufferCtx) {
+          bufferData = bufferCtx.getImageData(0, 0, bufferW, bufferH).data;
+          puffMinX = Infinity;
+          puffMaxX = -Infinity;
+          puffMinY = Infinity;
+          puffMaxY = -Infinity;
+          for (const p of particles) {
+            if (!p.active) continue;
+            const sx = (p.x / bufferW) * width;
+            const sy = (p.y / bufferH) * height;
+            if (sx < puffMinX) puffMinX = sx;
+            if (sx > puffMaxX) puffMaxX = sx;
+            if (sy < puffMinY) puffMinY = sy;
+            if (sy > puffMaxY) puffMaxY = sy;
+          }
+        }
+        puffLive = bufferData !== null && puffMaxX >= puffMinX;
+      } else {
+        bufferData = null;
+        puffAccum = 0;
+      }
+
       ctx.clearRect(0, 0, width, height);
 
       const theta = reduceMotion ? 0 : SPIN_DIR * t * SPIN_SPEED;
@@ -247,6 +473,8 @@ export default function AsciiPortrait() {
       const originX = width / 2;
       const originY = height / 2;
       const intro = Math.min(1, t / INTRO);
+      photoHalfW = (FACE_W / 2) * cellW;
+      photoHalfH = (FACE_H / 2) * step;
 
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
@@ -287,14 +515,18 @@ export default function AsciiPortrait() {
         ctx.restore();
       }
 
-      // ---- the KHAN streak along the cursor's trail -----------------------
+      // ---- KHAN in the empty space ---------------------------------------
       const strength = smoothstep(Math.min(1, speed / HOT_SPEED)) * presence * intro;
+      const pitchX = fontSize * HOT_TRACK;
+      const pitchY = fontSize * HOT_LEAD;
+      const inset = HOT_INSET * step;
+      const clearW = photoHalfW * facing + inset;
+      const clearH = photoHalfH + inset;
+      const hotFont = `500 ${fontSize.toFixed(2)}px Inter, "Helvetica Neue", Arial, sans-serif`;
+      const cellAt = (i: number, j: number) => HOT_WORD[(((i + j * 3) % 4) + 4) % 4];
+
+      // the streak trailing the cursor
       if (strength > 0.01 && trail.length > 1) {
-        const pitchX = fontSize * HOT_TRACK;
-        const pitchY = fontSize * HOT_LEAD;
-        const inset = HOT_INSET * step;
-        const halfW = (FACE_W / 2) * cellW * facing + inset;
-        const halfH = (FACE_H / 2) * step + inset;
         const headRadius = HOT_WIDTH * step;
 
         // Walk the trail and stamp brightness onto whichever cells it passes over.
@@ -341,15 +573,14 @@ export default function AsciiPortrait() {
           }
         }
 
-        ctx.font = `500 ${fontSize.toFixed(2)}px Inter, "Helvetica Neue", Arial, sans-serif`;
-
+        ctx.font = hotFont;
         for (const [key, h] of heat) {
           const i = unpackI(key);
           const j = unpackJ(key);
 
           const x = originX + (i + 0.5) * pitchX;
           const y = originY + (j + 0.5) * pitchY;
-          if (Math.abs(x - originX) < halfW && Math.abs(y - originY) < halfH) continue;
+          if (Math.abs(x - originX) < clearW && Math.abs(y - originY) < clearH) continue;
 
           // Cells drop out as the trail dims, so the tail frays instead of fading
           // as one block. The lattice is fixed, so letters flicker as it sweeps by.
@@ -358,11 +589,34 @@ export default function AsciiPortrait() {
           const alpha = HOT_ALPHA * (0.35 + 0.65 * h) * strength;
           if (alpha < MIN_ALPHA) continue;
 
-          const seq = i + j * 3;
-          const k = ((seq % HOT_WORD.length) + HOT_WORD.length) % HOT_WORD.length;
-
           ctx.globalAlpha = alpha < 1 ? alpha : 1;
-          ctx.fillText(HOT_WORD[k], x, y);
+          ctx.fillText(cellAt(i, j), x, y);
+        }
+      }
+
+      // the puff a press threw up: the lattice simply reads the particle buffer
+      if (puffLive) {
+        const pad = PUFF_SPRITE * 2 * (width / bufferW);
+        const i0 = Math.ceil((puffMinX - pad - originX) / pitchX - 0.5);
+        const i1 = Math.floor((puffMaxX + pad - originX) / pitchX - 0.5);
+        const j0 = Math.ceil((puffMinY - pad - originY) / pitchY - 0.5);
+        const j1 = Math.floor((puffMaxY + pad - originY) / pitchY - 0.5);
+
+        ctx.font = hotFont;
+        for (let j = j0; j <= j1; j++) {
+          const y = originY + (j + 0.5) * pitchY;
+          for (let i = i0; i <= i1; i++) {
+            const x = originX + (i + 0.5) * pitchX;
+            if (Math.abs(x - originX) < clearW && Math.abs(y - originY) < clearH) continue;
+
+            const glow = puffAt(x, y);
+            if (glow <= 0) continue;
+            const alpha = Math.min(1, glow * PUFF_GAIN) * intro;
+            if (alpha < MIN_ALPHA) continue;
+
+            ctx.globalAlpha = alpha;
+            ctx.fillText(cellAt(i, j), x, y);
+          }
         }
       }
 
@@ -387,6 +641,7 @@ export default function AsciiPortrait() {
       cancelAnimationFrame(raf);
       observer.disconnect();
       window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("pointerdown", onPress);
       document.removeEventListener("mouseleave", onLeave);
       document.removeEventListener("visibilitychange", onVisibility);
     };
