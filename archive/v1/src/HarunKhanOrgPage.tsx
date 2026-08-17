@@ -70,9 +70,7 @@ export default function HarunKhanOrgPage() {
           rel="noopener noreferrer"
         >
           substack
-        </a>{" "}
-        |{" "}
-        <a href="/projects">projects</a>
+        </a>
       </p>
     </section>
   );

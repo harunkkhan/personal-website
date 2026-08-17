@@ -1,8 +1,9 @@
 # v1 — the serif site
 
-A verbatim copy of the site as it stood before the letter-portrait redesign:
-white background, EB Garamond, a short bio with inline links, and the `work` /
-`post-wildfire landslides` pages.
+The site as it stood before the letter-portrait redesign: white background,
+EB Garamond, a short bio with inline links. The `work` / `post-wildfire
+landslides` pages have since been removed, along with the images and PDF they
+referenced.
 
 The same commit is also preserved in git, which is the better way back:
 
@@ -16,6 +17,3 @@ To restore it wholesale:
 ```sh
 cp -R archive/v1/src archive/v1/index.html .
 ```
-
-Note that `public/` was untouched by the redesign, so the images and PDF the old
-pages referenced are all still in place.

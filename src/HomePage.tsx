@@ -3,8 +3,6 @@ import AsciiPortrait from "./AsciiPortrait";
 
 type Item = { label: string; href: string };
 
-const WORK: Item[] = [{ label: "legacy", href: "/legacy" }];
-
 const SOCIAL: Item[] = [
   { label: "linkedin", href: "https://www.linkedin.com/in/harun-k-khan/" },
   { label: "github", href: "https://github.com/harunkkhan" },
@@ -50,8 +48,6 @@ export default function HomePage() {
       </div>
 
       <footer className="footer">
-        <Row items={WORK} />
-
         <div className="footerBottom">
           <p className="bio">
             Love meeting interesting people! Feel free to reach out at{" "}

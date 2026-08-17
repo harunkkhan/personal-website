@@ -1,8 +1,9 @@
 /**
  * The site as it was before the letter-portrait redesign, kept reachable at
- * /legacy. The markup is the original from archive/v1 verbatim; the only
- * additions are a way back and a wrapper that carries the old light styling,
- * which lives scoped under `.legacy` so it can't leak into the dark theme.
+ * /legacy, unlinked from the home page. The markup is the original from
+ * archive/v1 minus the projects link; the only additions are a way back and a
+ * wrapper carrying the old light styling, scoped under `.legacy` so it can't
+ * leak into the dark theme.
  */
 export default function LegacyPage() {
   return (
@@ -61,8 +62,7 @@ export default function LegacyPage() {
           |{" "}
           <a href="https://substack.com/@harunkhan" target="_blank" rel="noopener noreferrer">
             substack
-          </a>{" "}
-          | <a href="/projects">projects</a>
+          </a>
         </p>
       </section>
     </div>

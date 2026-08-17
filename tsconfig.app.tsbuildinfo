@@ -1,1 +1,1 @@
-{"root":["./src/app.tsx","./src/asciiportrait.tsx","./src/homepage.tsx","./src/legacypage.tsx","./src/postwildfirelandslidespage.tsx","./src/projectspage.tsx","./src/facedata.ts","./src/main.tsx","./src/vite-env.d.ts"],"version":"5.9.3"}
+{"root":["./src/app.tsx","./src/asciiportrait.tsx","./src/homepage.tsx","./src/legacypage.tsx","./src/facedata.ts","./src/main.tsx","./src/vite-env.d.ts"],"version":"5.9.3"}
