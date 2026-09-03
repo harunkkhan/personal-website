@@ -312,6 +312,9 @@ export default function AsciiPortrait() {
 
     // pointerdown covers mouse, touch and pen in one go.
     const onPress = (event: PointerEvent) => {
+      // the strip under the stage belongs to the arrow, so it throws no cloud
+      if (event.target instanceof Element && event.target.closest("[data-no-puff]")) return;
+
       const rect = canvas.getBoundingClientRect();
       const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;

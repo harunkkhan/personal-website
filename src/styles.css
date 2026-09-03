@@ -52,7 +52,10 @@ a {
   min-height: 100vh;
   min-height: 100svh;
   padding: clamp(20px, 3vw, 40px);
-  gap: clamp(20px, 4vh, 48px);
+  /* the arrow's strip carries the bottom padding itself, so the whole strip is
+     one element and presses anywhere in it are the arrow's, not the cloud's */
+  padding-bottom: 0;
+  gap: 0;
 }
 
 .stage {
@@ -76,14 +79,16 @@ a {
 .enterRow {
   display: flex;
   justify-content: center;
-  padding-bottom: clamp(4px, 1.5vh, 18px);
+  flex: none;
+  padding-bottom: clamp(8px, 1.4vh, 16px);
 }
 
-/* the mark is small, so the link carries a generous invisible hit area */
+/* the mark is small, so the link carries a generous invisible hit area — but
+   only around itself; the strip it sits in stays thin */
 .enter {
   display: block;
   color: var(--text);
-  padding: 18px 44px;
+  padding: 12px 40px;
   cursor: pointer;
 }
 
@@ -127,6 +132,22 @@ a {
   }
   100% {
     transform: translateY(46px);
+    opacity: 0;
+  }
+}
+
+/* a mark that points up breaks its loop off the top instead */
+.enter--up.enter--leaving .enterArrow {
+  animation: dartUp 620ms cubic-bezier(0.5, 0, 0.75, 0) forwards;
+}
+
+@keyframes dartUp {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-46px);
     opacity: 0;
   }
 }
@@ -178,82 +199,124 @@ a {
 
 @media (prefers-reduced-motion: reduce) {
   .enterArrow,
-  .enter--leaving .enterArrow {
+  .enter--leaving .enterArrow,
+  .enter--up.enter--leaving .enterArrow {
     animation: none;
   }
 }
 
-/* ---------------------------------------------------- the previous site ---- */
-/* Everything here is scoped under .legacy so the old light theme stays put on
-   /legacy and cannot leak into the rest of the site. */
+/* --------------------------------------------------------- light sheet ---- */
+/* The light pages (the directory and the posts under it) are scoped under
+   .sheet so their theme cannot leak into the dark portrait. The vertical
+   padding matches .home, so the mark at the foot lands in the same place on
+   every page; the horizontal inset is wider, framing the columns. */
 
-.legacy {
-  --legacy-text: #111;
+.sheet {
+  --sheet-text: #3f3f3f;
+  --sheet-name: #101010;
+  --sheet-mute: #8f8f8f;
+  --sheet-rule: rgba(17, 17, 17, 0.13);
   min-height: 100vh;
   min-height: 100svh;
   background: #fff;
-  color: var(--legacy-text);
-  font-family: "EB Garamond", "Times New Roman", Georgia, serif;
-  display: grid;
-  place-items: start center;
-  padding: clamp(24px, 8vw, 64px) clamp(16px, 5vw, 24px);
+  color: var(--sheet-text);
+  display: flex;
+  flex-direction: column;
+  padding: clamp(20px, 3vw, 40px) clamp(20px, 4.5vw, 96px);
+  /* the arrow strip carries the bottom padding itself, as on .home */
+  padding-bottom: 0;
 }
 
-.legacy ::selection {
+.sheet ::selection {
   background: rgba(17, 17, 17, 0.12);
 }
 
-.legacy .frontPage {
+.sheet .enter {
+  color: var(--sheet-text);
+}
+
+/* the block rides the middle of the page; min-height (not height) means a tall
+   column stack just grows the page rather than being clipped */
+.sheetBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
-  max-width: 620px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: clamp(40px, 10vh, 96px) clamp(20px, 5vw, 32px);
-  font-size: 15px;
-  line-height: 1.55;
-  letter-spacing: normal;
+  padding: clamp(24px, 5vh, 56px) 0;
 }
 
-.legacy .frontPage p {
-  margin: 0 0 1.4em;
+/* --------------------------------------------------------- directory ---- */
+
+.dirMasthead {
+  margin-bottom: clamp(26px, 4.2vh, 46px);
 }
 
-.legacy .frontPage p:last-child {
-  margin-bottom: 0;
+.dirName {
+  margin: 0;
+  font-size: clamp(30px, 3.4vw, 42px);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.032em;
+  color: var(--sheet-name);
 }
 
-.legacy .frontPage a {
-  color: var(--legacy-text);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
+.dirTagline {
+  margin: 0.42em 0 0;
+  font-size: clamp(16px, 1.7vw, 20px);
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  color: var(--sheet-mute);
 }
 
-.legacy .frontPage a:hover {
-  opacity: 0.65;
+.dir {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(28px, 3.4vw, 68px);
 }
 
-.legacy .frontPageBullets {
-  list-style: disc;
-  padding-left: 1.4em;
-  margin: 0 0 1.4em;
-}
-
-.legacy .frontPageBullets li {
-  margin-bottom: 0.15em;
-}
-
-.legacy .frontPageFooter {
-  margin-top: 1.4em;
-}
-
-.legacy .legacyBack {
+.dirHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--sheet-rule);
   font-size: 14px;
-  opacity: 0.55;
+  font-weight: 500;
+  line-height: 1.4;
 }
 
-@media (max-width: 480px) {
-  .legacy .frontPage {
-    font-size: 14px;
-    padding: 32px 20px;
+.dirRows {
+  padding-top: 8px;
+}
+
+/* the row's right edge is kept clear, so per-row icons can be dropped in later
+   without the type moving */
+.dirRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 2px 0;
+  font-size: 14px;
+  line-height: 1.42;
+  color: var(--sheet-text);
+  transition: opacity 140ms ease;
+}
+
+a.dirRow:hover,
+a.dirRow:focus-visible {
+  opacity: 0.5;
+  outline: none;
+}
+
+@media (max-width: 760px) {
+  .dir {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(26px, 6vw, 40px);
   }
 }
