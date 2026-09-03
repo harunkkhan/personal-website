@@ -235,8 +235,9 @@ a {
   color: var(--sheet-text);
 }
 
-/* the block rides the middle of the page; min-height (not height) means a tall
-   column stack just grows the page rather than being clipped */
+/* the directory rides the middle of the page; min-height (not height) means a
+   tall column stack just grows the page rather than being clipped. Sections and
+   pages sit up at the top instead, under their own heading. */
 .sheetBody {
   flex: 1;
   display: flex;
@@ -248,6 +249,49 @@ a {
   padding: clamp(24px, 5vh, 56px) 0;
 }
 
+/* sections and pages read as a single column, so they hold a narrower measure
+   than the directory's three-across */
+.sheetBody--top {
+  justify-content: flex-start;
+  max-width: 820px;
+}
+
+/* --------------------------------------------- section and page heads ---- */
+
+.pageHead {
+  margin-bottom: clamp(26px, 4.2vh, 46px);
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: clamp(26px, 2.7vw, 34px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--sheet-name);
+}
+
+.pageBack {
+  margin: 0.4em 0 0;
+  font-size: clamp(15px, 1.5vw, 17px);
+  line-height: 1.35;
+  color: var(--sheet-mute);
+}
+
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 9px;
+  font-size: 14px;
+  line-height: 1.42;
+}
+
+.crumbSep,
+.crumbHere {
+  color: var(--sheet-mute);
+}
+
 /* --------------------------------------------------------- directory ---- */
 
 .dirMasthead {
@@ -256,16 +300,16 @@ a {
 
 .dirName {
   margin: 0;
-  font-size: clamp(30px, 3.4vw, 42px);
+  font-size: clamp(26px, 2.7vw, 34px);
   font-weight: 600;
-  line-height: 1.08;
-  letter-spacing: -0.032em;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
   color: var(--sheet-name);
 }
 
 .dirTagline {
-  margin: 0.42em 0 0;
-  font-size: clamp(16px, 1.7vw, 20px);
+  margin: 0.45em 0 0;
+  font-size: clamp(15px, 1.5vw, 18px);
   line-height: 1.35;
   letter-spacing: -0.015em;
   color: var(--sheet-mute);
@@ -283,40 +327,85 @@ a {
   justify-content: space-between;
   gap: 12px;
   margin: 0;
-  padding-bottom: 9px;
+  padding-bottom: 7px;
   border-bottom: 1px solid var(--sheet-rule);
   font-size: 14px;
   font-weight: 500;
   line-height: 1.4;
 }
 
-.dirRows {
-  padding-top: 8px;
+.dirHeadLink {
+  color: inherit;
 }
 
-/* the row's right edge is kept clear, so per-row icons can be dropped in later
-   without the type moving */
+.dirRows {
+  padding-top: 4px;
+}
+
 .dirRow {
   display: flex;
-  align-items: center;
+  /* a wrapped label runs down the row, so the mark stays up on the first line
+     rather than drifting to the middle of the block */
+  align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
-  padding: 2px 0;
+  padding: 4px 0;
   font-size: 14px;
   line-height: 1.42;
   color: var(--sheet-text);
-  transition: opacity 140ms ease;
 }
 
-a.dirRow:hover,
-a.dirRow:focus-visible {
-  opacity: 0.5;
+/* flex items won't shrink below their content unless told to; without this a
+   long label pushes the mark off the row's right edge instead of wrapping */
+.dirLabel {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+/* hovering rules under the words only — the mark on the far edge stays put */
+a.dirRow:hover .dirLabel,
+a.dirRow:focus-visible .dirLabel,
+.dirHeadLink:hover,
+.dirHeadLink:focus-visible,
+.backLink:hover,
+.backLink:focus-visible,
+.crumb:hover,
+.crumb:focus-visible {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a.dirRow:focus-visible,
+.dirHeadLink:focus-visible,
+.backLink:focus-visible,
+.crumb:focus-visible {
   outline: none;
 }
 
-@media (max-width: 760px) {
+/* the mark rides the row's right edge, opposite the label */
+.dirIcon {
+  flex: none;
+  width: 17px;
+  height: 17px;
+}
+
+/* optically centred on the first line of the label */
+.dirRow > .dirIcon {
+  margin-top: 2px;
+}
+
+/* Three across needs room for the longest label; below that the columns pair
+   off — Posts beside Experiences, Contact dropping to the next row — instead of
+   squeezing. Phones keep the same two-up shape on a tighter gap. */
+@media (max-width: 1080px) {
   .dir {
-    grid-template-columns: minmax(0, 1fr);
-    gap: clamp(26px, 6vw, 40px);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .dir {
+    gap: clamp(24px, 6vw, 34px) clamp(16px, 4.5vw, 26px);
   }
 }
