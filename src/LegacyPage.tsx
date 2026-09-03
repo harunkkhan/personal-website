@@ -5,12 +5,21 @@
  * wrapper carrying the old light styling, scoped under `.legacy` so it can't
  * leak into the dark theme.
  */
-export default function LegacyPage() {
+export default function LegacyPage({ onBack }: { onBack: () => void }) {
   return (
     <div className="legacy">
       <section className="frontPage" aria-label="harunkhan.org, previous version">
         <p className="legacyBack">
-          <a href="/">← back to harunkhan.org</a>
+          <a
+            href="/"
+            onClick={(event) => {
+              if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+              event.preventDefault();
+              onBack();
+            }}
+          >
+            ← back to harunkhan.org
+          </a>
         </p>
 
         <p>
