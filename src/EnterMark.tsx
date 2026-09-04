@@ -17,26 +17,30 @@ export default function EnterMark({
   direction,
   label,
   onNavigate,
+  leaving = false,
 }: {
   to: string;
   direction: "up" | "down";
   label: string;
   onNavigate: () => void;
+  /** set while the page is on its way out for a reason other than a click */
+  leaving?: boolean;
 }) {
-  const [leaving, setLeaving] = useState(false);
+  const [clicked, setClicked] = useState(false);
+  const going = clicked || leaving;
 
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
-    if (leaving) return;
-    setLeaving(true);
+    if (going) return;
+    setClicked(true);
     onNavigate();
   };
 
   const className = [
     "enter",
     direction === "up" && "enter--up",
-    leaving && "enter--leaving",
+    going && "enter--leaving",
   ]
     .filter(Boolean)
     .join(" ");

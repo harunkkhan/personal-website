@@ -1,14 +1,15 @@
 import { InternalLink, type Open } from "./Column";
 import EnterMark from "./EnterMark";
+import Prose from "./Prose";
 import { pageKey, sectionKey, type Row, type Section } from "./content";
 
 /**
- * A page hanging off the directory whose contents are still to be written. The
- * crumbs above it are the way back up: the directory, then the section it sits
- * under, then this page — and the last crumb is where this page's name lands
- * after sliding up out of the list it was clicked in.
+ * A page hanging off the directory: its crumbs, then whatever it is written
+ * in. The crumbs above are the way back up — the directory, then the section
+ * it sits under, then this page — and the last crumb is where this page's name
+ * lands after sliding up out of the list it was clicked in.
  */
-export default function BlankPage({
+export default function ProsePage({
   section,
   row,
   onBack,
@@ -40,6 +41,8 @@ export default function BlankPage({
             {row.label}
           </span>
         </nav>
+
+        {row.body && <Prose source={row.body} onOpen={onOpen} />}
       </div>
 
       <EnterMark to="/" direction="up" label="back to the directory" onNavigate={onBack} />

@@ -10,9 +10,11 @@ import { SECTIONS } from "./content";
 export default function DirectoryPage({
   onBack,
   onOpen,
+  leaving,
 }: {
   onBack: () => void;
   onOpen: Open;
+  leaving: boolean;
 }) {
   return (
     <div className="sheet">
@@ -29,7 +31,13 @@ export default function DirectoryPage({
         </div>
       </div>
 
-      <EnterMark to="/" direction="up" label="back to the portrait" onNavigate={onBack} />
+      <EnterMark
+        to="/"
+        direction="up"
+        label="back to the portrait"
+        onNavigate={onBack}
+        leaving={leaving}
+      />
     </div>
   );
 }

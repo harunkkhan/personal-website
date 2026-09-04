@@ -81,10 +81,12 @@ export function HaladirIcon({ className }: IconProps) {
  */
 export function SecIcon({ className }: IconProps) {
   return (
-    <Icon className={className} strokeWidth={1.3}>
-      <g>
-        <circle cx="12" cy="12" r="11" />
-        <circle cx="12" cy="12" r="8.9" />
+    /* the rings carry the set's weight so the mark reads as boldly as its
+       neighbours; the eagle inside keeps a finer stroke or it closes up */
+    <Icon className={className} strokeWidth={1.1}>
+      <circle cx="12" cy="12" r="11.2" strokeWidth={1.55} />
+      <circle cx="12" cy="12" r="9.15" strokeWidth={1.55} />
+      <g transform="translate(-0.6 -0.6) scale(1.05)">
         {/* head turned left, beak, neck */}
         <circle cx="12.2" cy="8" r="1.25" />
         <path d="M11 8.3 9.9 8.6" />
@@ -118,12 +120,13 @@ export function SecIcon({ className }: IconProps) {
  */
 export function PatriotHacksIcon({ className }: IconProps) {
   return (
-    <Icon className={className} strokeWidth={1.4}>
-      <rect x="0.9" y="6.8" width="17.4" height="13.4" rx="3.4" />
-      <rect x="3" y="9.5" width="8.7" height="8.2" rx="2.1" />
-      <path d="M4.1 14.7a1.1 1.1 0 0 1 2.2 0M8.3 14.7a1.1 1.1 0 0 1 2.2 0" />
-      <circle cx="14.9" cy="14.4" r="1.8" />
-      <path d="M15.3 12.7 22.9 4 19.2 5.1 19.5 6.9 16.6 6.9Z" />
+    <Icon className={className} strokeWidth={1.45}>
+      <rect x="0.75" y="8.5" width="17.85" height="12.65" rx="3.5" />
+      <rect x="2.8" y="10.9" width="8.8" height="8" rx="2.1" />
+      <path d="M3.9 15.6a1.1 1.1 0 0 1 2.2 0M8.3 15.6a1.1 1.1 0 0 1 2.2 0" />
+      <circle cx="15.1" cy="15.3" r="1.75" />
+      <path d="M15.6 12.9c1.8-4.3 4.4-7.9 7.6-10-.9 4-2.9 7.4-5.6 9.8Z" />
+      <path d="M16.8 11.5 21.5 5.4" />
     </Icon>
   );
 }

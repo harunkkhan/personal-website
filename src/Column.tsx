@@ -84,15 +84,20 @@ export default function Column({ section, onOpen }: { section: Section; onOpen: 
   return (
     <section className="dirCol" aria-label={section.title}>
       <h2 className="dirHead">
+        {/* the title and its mark are one link, so clicking either opens the
+            section and hovering anywhere on the row rules under the words */}
         <InternalLink
           className="dirHeadLink"
           to={`/${section.id}`}
           onOpen={onOpen}
           flipKey={sectionKey(section.id)}
+          flipTarget={false}
         >
-          {section.title}
+          <span className="dirLabel" data-flip={sectionKey(section.id)}>
+            {section.title}
+          </span>
+          <Mark className="dirIcon" />
         </InternalLink>
-        <Mark className="dirIcon" />
       </h2>
       <div className="dirRows">
         {section.rows.map((row) => (

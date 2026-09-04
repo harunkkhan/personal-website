@@ -335,6 +335,11 @@ a {
 }
 
 .dirHeadLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
   color: inherit;
 }
 
@@ -365,8 +370,8 @@ a {
 /* hovering rules under the words only — the mark on the far edge stays put */
 a.dirRow:hover .dirLabel,
 a.dirRow:focus-visible .dirLabel,
-.dirHeadLink:hover,
-.dirHeadLink:focus-visible,
+.dirHeadLink:hover .dirLabel,
+.dirHeadLink:focus-visible .dirLabel,
 .backLink:hover,
 .backLink:focus-visible,
 .crumb:hover,
@@ -408,4 +413,95 @@ a.dirRow:focus-visible,
   .dir {
     gap: clamp(24px, 6vw, 34px) clamp(16px, 4.5vw, 26px);
   }
+}
+
+/* --------------------------------------------------------------- prose ---- */
+/* The written half of a page, under its crumbs. Markdown arrives as ordinary
+   elements, so the type is set here rather than in the renderer. The measure is
+   held well inside the sheet's width — a line of prose wants ~70 characters,
+   where the directory's columns want the room. */
+
+.prose {
+  max-width: 72ch;
+  margin-top: clamp(24px, 3.6vh, 36px);
+  font-size: 15px;
+  line-height: 1.62;
+}
+
+.prose > :first-child {
+  margin-top: 0;
+}
+
+.prose > :last-child {
+  margin-bottom: 0;
+}
+
+.prose p {
+  margin: 0 0 1.05em;
+}
+
+.prose h2,
+.prose h3 {
+  margin: 2em 0 0.5em;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--sheet-name);
+}
+
+.prose h2 {
+  font-size: 18px;
+}
+
+.prose h3 {
+  font-size: 15px;
+}
+
+/* the rule from "---": a full-measure hairline, matching the one under a
+   directory column's head */
+.prose hr {
+  height: 0;
+  margin: clamp(28px, 3.8vh, 42px) 0;
+  border: 0;
+  border-top: 1px solid var(--sheet-rule);
+}
+
+/* a heading straight after a rule already has the rule's space above it */
+.prose hr + h2,
+.prose hr + h3 {
+  margin-top: 0;
+}
+
+/* prose links carry their rule at rest — there are no rows or marks here to
+   tell them apart from the words around them */
+.prose a {
+  color: var(--sheet-name);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(17, 17, 17, 0.3);
+}
+
+.prose a:hover,
+.prose a:focus-visible {
+  text-decoration-color: currentColor;
+}
+
+.prose a:focus-visible {
+  outline: none;
+}
+
+.prose ul,
+.prose ol {
+  margin: 0 0 1.05em;
+  padding-left: 1.25em;
+}
+
+.prose li {
+  margin-bottom: 0.28em;
+}
+
+.prose strong {
+  font-weight: 600;
+  color: var(--sheet-name);
 }

@@ -2,7 +2,8 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react
 import HomePage from "./HomePage";
 import DirectoryPage from "./DirectoryPage";
 import SectionPage from "./SectionPage";
-import BlankPage from "./BlankPage";
+import ProsePage from "./ProsePage";
+import useWheelNav from "./useWheelNav";
 import { pageForPath, sectionById, sectionForPath, type SectionId } from "./content";
 
 /**
@@ -151,6 +152,18 @@ export default function App() {
     [view, wash],
   );
 
+  /* a wheel gesture on the root moves between the two the same way the mark does */
+  const atRoot = view.at === "portrait" || view.at === "directory";
+  const wheelDown = useCallback(() => {
+    if (view.at === "portrait") navigate({ at: "directory" });
+  }, [view, navigate]);
+  const wheelUp = useCallback(() => {
+    // let a directory taller than the window scroll first; only leave from the top
+    if (view.at === "directory" && window.scrollY <= 0) navigate({ at: "portrait" });
+  }, [view, navigate]);
+
+  useWheelNav({ enabled: atRoot, onDown: wheelDown, onUp: wheelUp });
+
   const open = useCallback(
     (to: string, flipKey?: string) => navigate(viewForLink(to), flipKey),
     [navigate],
@@ -165,16 +178,20 @@ export default function App() {
       {section ? (
         <SectionPage section={section} onBack={toDirectory} onOpen={open} />
       ) : page ? (
-        <BlankPage
+        <ProsePage
           section={page.section}
           row={page.row}
           onBack={toDirectory}
           onOpen={open}
         />
       ) : view.at === "directory" ? (
-        <DirectoryPage onBack={() => navigate({ at: "portrait" })} onOpen={open} />
+        <DirectoryPage
+          onBack={() => navigate({ at: "portrait" })}
+          onOpen={open}
+          leaving={wash?.phase === "in"}
+        />
       ) : (
-        <HomePage onEnter={toDirectory} />
+        <HomePage onEnter={toDirectory} leaving={wash?.phase === "in"} />
       )}
 
       {wash && <div className={`wash wash--${wash.tone} wash--${wash.phase}`} />}

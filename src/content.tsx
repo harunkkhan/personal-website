@@ -14,23 +14,26 @@ import {
   SubstackIcon,
   XIcon,
 } from "./icons";
+import patriothacksBody from "./pages/patriothacks.md?raw";
+import readmeBody from "./pages/readme.md?raw";
 
 export type Glyph = ComponentType<{ className?: string }>;
-export type Row = { label: string; href?: string; icon: Glyph };
+export type Row = { label: string; href?: string; icon: Glyph; body?: string };
 export type SectionId = "posts" | "experiences" | "contact";
 export type Section = { id: SectionId; title: string; icon: Glyph; rows: Row[] };
 
 /**
  * The whole site's contents. A row whose href starts with "/" is a page on this
  * site; everything else leaves. Sections and pages are routed straight off this
- * list, so adding a page is one row here rather than a row plus a route.
+ * list, so adding a page is one row here rather than a row plus a route — and
+ * `body` is the markdown that page is written in, read out of src/pages.
  */
 export const SECTIONS: Section[] = [
   {
     id: "posts",
     title: "Posts",
     icon: BookIcon,
-    rows: [{ label: "README.md", href: "/readme", icon: ReadmeIcon }],
+    rows: [{ label: "README.md", href: "/readme", icon: ReadmeIcon, body: readmeBody }],
   },
   {
     id: "experiences",
@@ -43,7 +46,12 @@ export const SECTIONS: Section[] = [
         href: "https://www.sec.gov/",
         icon: SecIcon,
       },
-      { label: "PatriotHacks - President", href: "/patriothacks", icon: PatriotHacksIcon },
+      {
+        label: "PatriotHacks - President",
+        href: "/patriothacks",
+        icon: PatriotHacksIcon,
+        body: patriothacksBody,
+      },
       { label: "Leidos - Intern", href: "https://www.leidos.com/", icon: LeidosIcon },
     ],
   },
