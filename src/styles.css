@@ -491,6 +491,20 @@ a.dirRow:focus-visible,
   outline: none;
 }
 
+/* a blockquote is the page standing back from itself — a TL;DR at the top, an
+   aside further down. The rule marks it off and the indent sets it in; the type
+   stays exactly as the prose around it, so it reads as the same voice rather
+   than a pull quote. */
+.prose blockquote {
+  margin: 0 0 1.05em;
+  padding-left: 1.15em;
+  border-left: 2px solid var(--sheet-rule);
+}
+
+.prose blockquote > :last-child {
+  margin-bottom: 0;
+}
+
 .prose ul,
 .prose ol {
   margin: 0 0 1.05em;

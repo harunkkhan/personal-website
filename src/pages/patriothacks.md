@@ -1,19 +1,5 @@
-One line on what PatriotHacks is and what you do there.
+> **TL;DR**: PatriotHacks is George Mason University's Premier Hackathon Organization. BuildPatriots runs under it, being the commmunity for ambitious builders, makers and creatives at George Mason University. PatriotHacks has hosted thousands of students and partnered with places like Microsoft, Amazon, Salesforce and more.
 
 ---
 
-## what it is
-
-The hackathon itself — who runs it, who comes, how big it is.
-
----
-
-## the role
-
-What being president actually involves.
-
----
-
-## what we built
-
-What came out of it.
+more info coming soon.

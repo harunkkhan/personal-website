@@ -2,22 +2,12 @@ hey, I'm harun khan.
 
 ---
 
-## currently
+## about me
 
-Where you are and what you're doing now. A blank line between two blocks of text
-makes them separate paragraphs, and a link is written [like this](https://example.com).
-
-This is a second paragraph, to show the spacing between them.
+I'm a student at George Mason University, studying CS, Stats and Math. I'm also an avid poker enjoyer and pickleball enthusiast. Previoiusly, I've worked at Haladir, the US Securities & Exchange Commission and Leidos.
 
 ---
 
-## previously
+## talk to me
 
-What came before. The three dashes above and below this section are the rule —
-drop one in wherever a page needs a break.
-
----
-
-## otherwise
-
-The half that isn't work.
+I love working on cool things and chatting with interesting people. If you'd like to talk, feel free to [reach out](https://cal.com/harun-khan/15-minute-chat).

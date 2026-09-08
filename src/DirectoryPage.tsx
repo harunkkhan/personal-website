@@ -21,7 +21,7 @@ export default function DirectoryPage({
       <div className="sheetBody">
         <header className="dirMasthead">
           <h1 className="dirName">harun khan</h1>
-          <p className="dirTagline">x, y, z</p>
+          <p className="dirTagline">math, rl, coding agents, entrepreneurship</p>
         </header>
 
         <div className="dir">
