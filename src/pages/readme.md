@@ -4,7 +4,7 @@ hey, I'm harun khan.
 
 ## about me
 
-I'm a student at George Mason University, studying CS, Stats and Math. I'm also an avid poker enjoyer and pickleball enthusiast. Previoiusly, I've worked at Haladir, the US Securities & Exchange Commission and Leidos.
+I'm a student at George Mason University, studying CS, Stats and Math. I'm also an avid poker enjoyer and pickleball enthusiast. Previoiusly, I've worked at [Haladir](haladir.com), [the Securities & Exchange Commission](sec.gov) and [Leidos](leidos.com).
 
 ---
 
