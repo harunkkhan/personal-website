@@ -11,21 +11,29 @@ import { InternalLink, type Open } from "./Column";
  * at this site is handed to the app so it swaps views rather than reloading,
  * exactly as a directory row is, and one leaving opens in its own tab.
  */
+/** Bare domains in markdown (e.g. leidos.com) are relative in HTML unless prefixed. */
+const resolveHref = (href: string | undefined) => {
+  if (!href) return href;
+  if (/^(?:\/|https?:|mailto:|#)/.test(href)) return href;
+  return `https://${href}`;
+};
+
 export default function Prose({ source, onOpen }: { source: string; onOpen: Open }) {
   const components: Components = {
     a({ href, children }) {
-      if (href?.startsWith("/")) {
+      const resolved = resolveHref(href);
+      if (resolved?.startsWith("/")) {
         return (
-          <InternalLink to={href} onOpen={onOpen}>
+          <InternalLink to={resolved} onOpen={onOpen}>
             {children}
           </InternalLink>
         );
       }
-      const external = href?.startsWith("mailto:")
+      const external = resolved?.startsWith("mailto:")
         ? {}
         : { target: "_blank", rel: "noopener noreferrer" };
       return (
-        <a href={href} {...external}>
+        <a href={resolved} {...external}>
           {children}
         </a>
       );
