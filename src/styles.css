@@ -1,9 +1,6 @@
 :root {
-  --bg: #0a0a0a;
-  --text: #f2f0eb;
-  --dim: rgba(242, 240, 235, 0.58);
-  --dimmer: rgba(242, 240, 235, 0.34);
-  --rule: rgba(242, 240, 235, 0.12);
+  --bg: #fff;
+  --text: #3f3f3f;
   --body: 14px;
 }
 
@@ -32,7 +29,7 @@ body {
 }
 
 ::selection {
-  background: rgba(242, 240, 235, 0.16);
+  background: rgba(17, 17, 17, 0.12);
 }
 
 a {
@@ -42,36 +39,6 @@ a {
 
 #root {
   min-height: 100%;
-}
-
-/* ---------------------------------------------------------------- home ---- */
-
-.home {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  min-height: 100svh;
-  padding: clamp(20px, 3vw, 40px);
-  /* the arrow's strip carries the bottom padding itself, so the whole strip is
-     one element and presses anywhere in it are the arrow's, not the cloud's */
-  padding-bottom: 0;
-  gap: 0;
-}
-
-.stage {
-  position: relative;
-  flex: 1;
-  min-height: 240px;
-}
-
-.portraitCanvas {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  /* the portrait leans on the cursor, so let clicks through to the page */
-  pointer-events: none;
 }
 
 /* --------------------------------------------------------------- enter ---- */
@@ -152,51 +119,6 @@ a {
   }
 }
 
-/* ---------------------------------------------------------------- wash ---- */
-/* Full-bleed sheet that covers the outgoing page, gets swapped underneath, and
-   then lifts to reveal the incoming one. */
-
-.wash {
-  position: fixed;
-  inset: 0;
-  z-index: 20;
-  pointer-events: none;
-}
-
-.wash--light {
-  background: #fff;
-}
-
-.wash--dark {
-  background: var(--bg);
-}
-
-.wash--in {
-  animation: washIn 620ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-.wash--out {
-  animation: washOut 520ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-@keyframes washIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes washOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .enterArrow,
   .enter--leaving .enterArrow,
@@ -205,34 +127,24 @@ a {
   }
 }
 
-/* --------------------------------------------------------- light sheet ---- */
-/* The light pages (the directory and the posts under it) are scoped under
-   .sheet so their theme cannot leak into the dark portrait. The vertical
-   padding matches .home, so the mark at the foot lands in the same place on
-   every page; the horizontal inset is wider, framing the columns. */
+/* --------------------------------------------------------------- sheet ---- */
+/* Every page sits on a .sheet; the horizontal inset is wider than the
+   vertical, framing the columns. */
 
 .sheet {
-  --sheet-text: #3f3f3f;
+  --sheet-text: var(--text);
   --sheet-name: #101010;
   --sheet-mute: #8f8f8f;
   --sheet-rule: rgba(17, 17, 17, 0.13);
   min-height: 100vh;
   min-height: 100svh;
-  background: #fff;
+  background: var(--bg);
   color: var(--sheet-text);
   display: flex;
   flex-direction: column;
   padding: clamp(20px, 3vw, 40px) clamp(20px, 4.5vw, 96px);
-  /* the arrow strip carries the bottom padding itself, as on .home */
+  /* the arrow strip carries the bottom padding itself */
   padding-bottom: 0;
-}
-
-.sheet ::selection {
-  background: rgba(17, 17, 17, 0.12);
-}
-
-.sheet .enter {
-  color: var(--sheet-text);
 }
 
 /* the directory rides the middle of the page; min-height (not height) means a

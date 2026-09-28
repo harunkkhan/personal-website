@@ -1,21 +1,8 @@
 import Column, { type Open } from "./Column";
-import EnterMark from "./EnterMark";
 import { SECTIONS } from "./content";
 
-/**
- * harunkhan.org's directory: three columns of links, and an upward mark that
- * mirrors the portrait's downward one. It shares the root URL with the
- * portrait — the mark swaps between them rather than navigating.
- */
-export default function DirectoryPage({
-  onBack,
-  onOpen,
-  leaving,
-}: {
-  onBack: () => void;
-  onOpen: Open;
-  leaving: boolean;
-}) {
+/** harunkhan.org's directory: three columns of links at the root URL. */
+export default function DirectoryPage({ onOpen }: { onOpen: Open }) {
   return (
     <div className="sheet">
       <div className="sheetBody">
@@ -30,14 +17,6 @@ export default function DirectoryPage({
           ))}
         </div>
       </div>
-
-      <EnterMark
-        to="/"
-        direction="up"
-        label="back to the portrait"
-        onNavigate={onBack}
-        leaving={leaving}
-      />
     </div>
   );
 }
