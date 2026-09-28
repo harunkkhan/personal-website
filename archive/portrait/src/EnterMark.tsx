@@ -17,18 +17,22 @@ export default function EnterMark({
   direction,
   label,
   onNavigate,
+  leaving = false,
 }: {
   to: string;
   direction: "up" | "down";
   label: string;
   onNavigate: () => void;
+  /** set while the page is on its way out for a reason other than a click */
+  leaving?: boolean;
 }) {
   const [clicked, setClicked] = useState(false);
+  const going = clicked || leaving;
 
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
-    if (clicked) return;
+    if (going) return;
     setClicked(true);
     onNavigate();
   };
@@ -36,13 +40,13 @@ export default function EnterMark({
   const className = [
     "enter",
     direction === "up" && "enter--up",
-    clicked && "enter--leaving",
+    going && "enter--leaving",
   ]
     .filter(Boolean)
     .join(" ");
 
   return (
-    <div className="enterRow">
+    <div className="enterRow" data-no-puff="">
       <a className={className} href={to} aria-label={label} onClick={handleClick}>
         <svg
           className="enterArrow"
