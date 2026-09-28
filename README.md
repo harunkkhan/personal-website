@@ -1,19 +1,23 @@
-# v1 — the serif site
+# personal-website
 
-The site as it stood before the letter-portrait redesign: white background,
-EB Garamond, a short bio with inline links. The `work` / `post-wildfire
-landslides` pages have since been removed, along with the images and PDF they
-referenced.
-
-The same commit is also preserved in git, which is the better way back:
+Harun Khan's personal site: white background, EB Garamond, a short bio with
+inline links. Built with Vite, React and TypeScript, deployed on Vercel.
 
 ```sh
-git switch v1-legacy      # branch pinned at the last v1 commit
-git show v1-legacy         # ...or just look at the tag
+npm install
+npm run dev       # local dev server at http://localhost:5173
+npm run build     # typecheck and build to dist/
+npm run preview   # serve the production build
 ```
 
-To restore it wholesale:
+## Archive
+
+`archive/portrait/` is a standalone copy of the previous version: a black
+landing screen with a rotating ASCII portrait that leads into a white
+directory page. It is not part of the build. To run it:
 
 ```sh
-cp -R archive/v1/src archive/v1/index.html .
+cd archive/portrait
+npm install
+npm run dev
 ```
