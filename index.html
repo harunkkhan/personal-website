@@ -12,6 +12,14 @@
     <link rel="icon" href="/harun-profile.png" type="image/png" />
     <title>harunkhan.org</title>
     <meta name="description" content="Harun Khan – harunkhan.org" />
+    <script>
+      window.__views = fetch("/api/views", { method: "POST" })
+        .then((res) => {
+          if (!res.ok) throw new Error("views request failed: " + res.status);
+          return res.json();
+        })
+        .then((data) => data.views);
+    </script>
   </head>
   <body>
     <div id="root"></div>
