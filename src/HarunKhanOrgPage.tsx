@@ -115,7 +115,7 @@ export default function HarunKhanOrgPage() {
 
         <p>
           I'm currently working on{" "}
-          <Company name="gaia" href="https://gaiasciences.vercel.app">
+          <Company name="gaia" href="https://gaiasciences.co">
             Gaia Sciences
           </Company>
           .
